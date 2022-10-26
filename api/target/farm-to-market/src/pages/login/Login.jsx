@@ -3,17 +3,20 @@ import { Link } from "react-router-dom";
 import "./Login.scss";
 import logo from "./wheat_PNG47.png";
 import welcomeimg from "./welcome.jpg";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/actions/auth";
 
 function Login() {
-  const initialValues = { username: "", password: "" };
-  const [formValues, setFormValues] = useState(initialValues);
+  const [formValues, setFormValues] = useState({ userName: "", password: "" });
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    dispatch(login(formValues));
   };
 
   const handleChange = (e) => {
@@ -23,14 +26,13 @@ function Login() {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
     }
   }, [formErrors]);
 
   const validate = (values) => {
     const errors = {};
-    if (!values.username) {
-      errors.username = "Username is required";
+    if (!values.userName) {
+      errors.userName = "Username is required";
     }
     if (!values.password) {
       errors.password = "Password is required";
@@ -52,12 +54,12 @@ function Login() {
             <input
               placeholder="Username"
               type="text"
-              name="username"
-              id="username"
-              value={formValues.username}
+              name="userName"
+              id="userName"
+              value={formValues.userName}
               onChange={handleChange}
             />
-            <p id="errorid">{formErrors.username}</p>
+            <p id="errorid">{formErrors.userName}</p>
             <label>Password</label>
             <input
               placeholder="Password"
