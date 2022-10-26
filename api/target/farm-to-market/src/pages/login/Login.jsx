@@ -5,6 +5,7 @@ import logo from "./wheat_PNG47.png";
 import welcomeimg from "./welcome.jpg";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/actions/auth";
+import Joi from "joi";
 
 function Login() {
   const [formValues, setFormValues] = useState({ userName: "", password: "" });
@@ -18,6 +19,11 @@ function Login() {
     setIsSubmit(true);
     dispatch(login(formValues));
   };
+
+  const schema = Joi.object({
+    userName: Joi.string().required(),
+    password: Joi.string().required(),
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
