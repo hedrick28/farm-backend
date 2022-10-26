@@ -67,8 +67,37 @@
 
 .login-contain {
   @include breakpoint-max(sm) {
-    flex-direction: column !important;
+    flex-direction: column-reverse !important;
     width: 100% !important;
+    height: 100% !important;
+    .left-side,
+    .right-side {
+      margin: 2rem 2rem;
+      box-shadow: 0.5rem 0.5rem 2rem -1rem rgb(58, 57, 57);
+      height: 39%;
+      width: 88%;
+    }
+    .right-side {
+      .welcomeNote {
+        h3 {
+          margin-left: 1rem;
+          float: left;
+          color: black;
+          margin-bottom: 2.5rem;
+          text-align: center;
+        }
+      }
+      .welcomeimg {
+        height: 50%;
+        width: 70%;
+        margin: 0rem auto;
+        #wel-img-id {
+          min-width: 75px;
+          max-width: 156px;
+          object-fit: cover;
+        }
+      }
+    }
   }
 }
 

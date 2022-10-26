@@ -15,6 +15,7 @@ $main-color: #4dd6b6;
     rgb(223, 221, 221) 50%,
     $main-color 50%
   );
+  text-align: center;
 }
 .login-contain {
   width: 70%;
@@ -28,6 +29,7 @@ $main-color: #4dd6b6;
   align-items: center;
   .link {
     text-decoration: none;
+    font-size: small;
     color: $main-color;
   }
   .left-side,
