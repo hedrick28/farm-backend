@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import Login from "./pages/login/Login";
 import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
@@ -7,6 +8,7 @@ import "./scss/style.scss";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+const Landing = React.lazy(() => import("./pages/landing/Landing"));
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
       <ToastContainer />
       <Header />
       <Routes>
-        <Route path="/" element={<Login />}></Route>
+        <Route path="/" element={<Landing />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/register" element={<RegisterPage />} />
