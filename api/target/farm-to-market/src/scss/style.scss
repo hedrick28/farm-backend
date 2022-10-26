@@ -1,4 +1,5 @@
 @import "./mixins";
+@import "./buttons";
 .student-list-table {
   @include breakpoint-max(md) {
     display: none !important;
