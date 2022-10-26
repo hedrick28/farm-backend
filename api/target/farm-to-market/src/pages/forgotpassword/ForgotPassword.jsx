@@ -2,6 +2,7 @@ import React from "react";
 import "./ForgotPassword.scss";
 import { Link } from "react-router-dom";
 
+
 const ForgotPassword = () => {
   return (
     <div className="main-Fpassword">
@@ -36,6 +37,7 @@ const ForgotPassword = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
