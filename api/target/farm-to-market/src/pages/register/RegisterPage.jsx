@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../redux/actions/auth";
 import Joi from "joi";
+import { useDispatch } from "react-redux";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     birthDate: "",
     mobileNumber: "",
-    emailAddress: "",
-    username: "",
+    email: "",
+    userName: "",
     password: "",
     role: "",
   });
 
   const schema = Joi.object({
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
+    firstName: Joi.string().min(1).required(),
+    lastName: Joi.string().min(1).required(),
     birthDate: Joi.string()
       .allow("")
       .required()
@@ -39,12 +42,16 @@ const RegisterPage = () => {
       .length(11)
       .pattern(/[0]{1}[9]{1}[0-9]{9}/)
       .required(),
-    emailAddress: Joi.string()
+    email: Joi.string()
+      .allow("")
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
       .optional(),
-    emailAddress: Joi.string().optional(),
-    username: Joi.string().alphanum().min(3).max(25).trim(true).required(),
-    password: Joi.string().required(),
+    userName: Joi.string().alphanum().min(7).max(25).trim(true).required(),
+    password: Joi.string()
+      .min(7)
+      .max(30)
+      .pattern(/[a-zA-Z0-9]/)
+      .required(),
     role: Joi.string().required(),
   });
 
@@ -66,35 +73,27 @@ const RegisterPage = () => {
     }
   };
 
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     try {
-  //       await authService.register(form.username, form.password);
-  //       alert("Successfully registered!");
-  //       navigate("/login");
-  //     } catch (error) {
-  //       if (error.response && error.response.data.statusCode === 400) {
-  //         alert(error.response.data.message[0]);
-  //       }
-  //     }
-  //   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(form);
-    console.log("Registered successfully");
+    dispatch(register(form));
+    //navigate("/");
   };
 
   const isFormInvalid = () => {
     const result = schema.validate(form);
-    console.log(result);
     return !!result.error;
   };
 
   return (
-    <div className="container d-flex justify-content-center">
-      <form className="row g-3 needs-validation">
-        <h3>Gumawa ng account</h3>
+    <div className="container d-flex justify-content-center f-bg-primary">
+      <form
+        className="row g-3 needs-validation"
+        onSubmit={handleSubmit}
+        method="post"
+      >
+        <h3 className="d-flex justify-content-center mt-4">
+          Gumawa ng Account
+        </h3>
         <div className="col-md-4">
           <label htmlFor="firstName" className="form-label">
             Unang Pangalan
@@ -106,12 +105,13 @@ const RegisterPage = () => {
             name="firstName"
             value={form.firstName}
             onChange={handleChange}
+            placeholder="Jose"
           />
           {errors.firstName && (
             <div className="text-danger">Maglagay ng unang pangalan.</div>
           )}
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
           <label htmlFor="lastName" className="form-label">
             Apelyido
           </label>
@@ -122,13 +122,16 @@ const RegisterPage = () => {
             name="lastName"
             value={form.lastName}
             onChange={handleChange}
+            placeholder="Rizal"
           />
           {errors.lastName && (
             <div className="text-danger">Maglagay ng apelyido.</div>
           )}
         </div>
-        <div className="row g-3">
-          <div className="col-12">Kapanganakan</div>
+        <div className="col-md-4">
+          <label htmlFor="birthDate" className="form-label">
+            Kapanganakan
+          </label>
           <input
             type="date"
             className="form-control"
@@ -144,6 +147,7 @@ const RegisterPage = () => {
             </div>
           )}
         </div>
+
         <div className="row g-2">
           <div className="col-md-6">
             <div className="form-group">
@@ -157,6 +161,7 @@ const RegisterPage = () => {
                 name="mobileNumber"
                 value={form.mobileNumber}
                 onChange={handleChange}
+                placeholder="09163483419"
               />
               {errors.mobileNumber && (
                 <div className="text-danger">
@@ -172,8 +177,8 @@ const RegisterPage = () => {
             <input
               type="text"
               className="form-control"
-              id="emailAddress"
-              name="emailAddress"
+              id="email"
+              name="email"
               value={form.emailAddress}
               onChange={handleChange}
             />
@@ -187,10 +192,11 @@ const RegisterPage = () => {
             <input
               type="text"
               className="form-control"
-              id="username"
-              name="username"
+              id="userName"
+              name="userName"
               value={form.username}
               onChange={handleChange}
+              placeholder="jRizal"
             />
             {errors.username && (
               <div className="text-danger">Maglagay ng username.</div>
@@ -207,15 +213,19 @@ const RegisterPage = () => {
               name="password"
               value={form.password}
               onChange={handleChange}
+              placeholder="makaBayan77"
             />
             {errors.password && (
-              <div className="text-danger">Maglagay ng password.</div>
+              <div className="text-danger">
+                Maglagay ng password. 7 ang pinakamababang kumbinasyon ng numero
+                at alpabeto ang pwedeng gamitin.
+              </div>
             )}
           </div>
         </div>
         <div className="col-12">Sumali bilang isang (Pumili ng isa) : </div>
 
-        <div className="row">
+        <div className="row d-flex justify-content-center">
           <div className="form-check col-4">
             <input
               className="form-check-input"
@@ -224,7 +234,8 @@ const RegisterPage = () => {
               id="farmer"
               value="magsasaka"
               onChange={handleChange}
-              checked={form.role === "magsasaka"}
+              // onClick={() => setRadioBtn("farmer")}
+              // checked={form.role === "magsasaka"}
             />
 
             <label className="form-check-label" htmlFor="farmer">
@@ -239,7 +250,8 @@ const RegisterPage = () => {
               id="supplier"
               value="supplier"
               onChange={handleChange}
-              checked={form.role === "suplayer"}
+              // onClick={() => setRadioBtn("suplayer")}
+              // checked={form.role === "suplayer"}
             />
 
             <label className="form-check-label" htmlFor="supplier">
@@ -254,7 +266,8 @@ const RegisterPage = () => {
               id="admin"
               value="administrador"
               onChange={handleChange}
-              checked={form.role === "admin"}
+              // onClick={() => setRadioBtn("admin")}
+              // checked={form.role === "admin"}
             />
 
             <label className="form-check-label" htmlFor="admin">
@@ -264,9 +277,9 @@ const RegisterPage = () => {
           {errors.role && <div className="text-danger">Pumili ng isa.</div>}
         </div>
 
-        <div className="col-12">
+        <div className="col-12 md-10">
           <button
-            className="btn btn-primary"
+            className="btn btn-f-primary w-100 "
             type="submit"
             disabled={isFormInvalid()}
           >
