@@ -1,6 +1,8 @@
 @import "./mixins";
 @import "./buttons";
 @import "./header";
+@import "../pages/register/Register.scss";
+
 .student-list-table {
   @include breakpoint-max(md) {
     display: none !important;
