@@ -1,39 +1,8 @@
-// If you want to override variables do it here
-@import 'variables';
-
-$enable-ltr: true;
-$enable-rtl: true;
-
-// Import CoreUI for React components library
-@import '@coreui/coreui/scss/coreui';
-
-// Import Chart.js custom tooltips styles
-@import '@coreui/chartjs/scss/coreui-chartjs';
-
-@import 'layout';
-@import 'example';
-
-// If you want to add custom CSS you can put it here.
-@import 'custom';
-
-@import 'auth.scss';
-
+@import "./mixins";
+@import "./buttons";
 .student-list-table {
   @include breakpoint-max(md) {
     display: none !important;
-  }
-}
-
-.student-list-card {
-  display: none !important;
-  @include breakpoint-max(md) {
-    display: block !important;
-  }
-}
-
-.subject-list-table {
-  @include breakpoint-max(md) {
-    overflow-x: scroll !important;
   }
 }
 
@@ -51,7 +20,7 @@ $enable-rtl: true;
 }
 
 .spinner .dot::after {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -96,8 +65,18 @@ $enable-rtl: true;
   align-items: center;
 }
 
-.sample {
+.login-contain {
   @include breakpoint-max(sm) {
-    display: none;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+}
+
+.main-login {
+  @include breakpoint-max(sm) {
+    width: 100% !important;
+  }
+  @include breakpoint-max(md) {
+    width: 100% !important;
   }
 }

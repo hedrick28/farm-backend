@@ -3,6 +3,7 @@ import Login from "./pages/login/Login";
 import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import RegisterPage from "./pages/register/RegisterPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./scss/style.scss";
 
 function App() {
   return (
