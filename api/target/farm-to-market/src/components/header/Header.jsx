@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo/logo.png";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
@@ -20,32 +21,34 @@ const Header = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav w-100 ">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Features
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Pricing
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link disabled"
-                href="#"
-                tabIndex="-1"
-                aria-disabled="true"
+        <div className="collapse navbar-collapse " id="navbarNav">
+          <form className="d-flex w-100 align-self-center mt-2">
+            <div className="input-group mb-3 ">
+              <input
+                type="text"
+                className="form-control search-input"
+                placeholder="Search product"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+              />
+              <span
+                className="input-group-text btn-f-primary"
+                id="basic-addon2"
               >
-                Disabled
-              </a>
+                <FontAwesomeIcon icon={faSearch} />
+              </span>
+            </div>
+          </form>
+          <ul className="navbar-nav w-100 justify-content-end">
+            <li className="nav-item nav-router-link">
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item nav-router-link">
+              <Link className="nav-link" to="/register">
+                Register
+              </Link>
             </li>
           </ul>
         </div>

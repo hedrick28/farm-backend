@@ -19,3 +19,17 @@
     display: block;
   }
 }
+.search-input {
+  @include breakpoint-max(md) {
+    width: 250px;
+  }
+}
+
+.nav-router-link {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.nav-router-link:hover {
+  text-decoration: underline;
+}
