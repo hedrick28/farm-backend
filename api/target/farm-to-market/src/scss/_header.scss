@@ -1,0 +1,17 @@
+.colorChange {
+  color: #022135 !important;
+}
+
+.breadcrumb {
+  background-color: transparent;
+  border: none;
+}
+
+.bccontainer {
+  font-size: 16px;
+}
+
+.stickycont {
+  min-height: calc(var(--cui-header-min-height) - 3 * var(--cui-header-padding-y));
+  cursor: pointer;
+}
