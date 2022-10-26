@@ -5,21 +5,19 @@ import RegisterPage from "./pages/register/RegisterPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
 import { ToastContainer } from "react-toastify";
+import Header from "./components/header/Header";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <BrowserRouter>
-          <ToastContainer />
-          <Routes>
-            <Route path="/" element={<Login />}></Route>
-            <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
-            <Route path="/register" element={<RegisterPage />} />
-          </Routes>
-        </BrowserRouter>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ToastContainer />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,17 +1,21 @@
-.colorChange {
-  color: #022135 !important;
+@import "./mixins";
+.f-bg-primary {
+  background: linear-gradient(-45deg, #04b250 -5%, #fff 60%) !important;
 }
 
-.breadcrumb {
-  background-color: transparent;
-  border: none;
+.logo {
+  max-width: 70px;
 }
 
-.bccontainer {
-  font-size: 16px;
+.logo-container-list {
+  @include breakpoint-max(sm) {
+    display: none;
+  }
 }
 
-.stickycont {
-  min-height: calc(var(--cui-header-min-height) - 3 * var(--cui-header-padding-y));
-  cursor: pointer;
+.logo-container-brand {
+  display: none;
+  @include breakpoint-max(sm) {
+    display: block;
+  }
 }
