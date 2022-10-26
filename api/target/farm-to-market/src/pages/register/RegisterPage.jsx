@@ -85,7 +85,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center f-bg-primary">
+    <div className="container d-flex justify-content-center reg-border">
       <form
         className="row g-3 needs-validation"
         onSubmit={handleSubmit}
@@ -161,7 +161,7 @@ const RegisterPage = () => {
                 name="mobileNumber"
                 value={form.mobileNumber}
                 onChange={handleChange}
-                placeholder="09163483419"
+                placeholder="09163412345"
               />
               {errors.mobileNumber && (
                 <div className="text-danger">
@@ -196,7 +196,7 @@ const RegisterPage = () => {
               name="userName"
               value={form.userName}
               onChange={handleChange}
-              placeholder="jRizal"
+              placeholder="jRizal1234"
             />
             {errors.userName && (
               <div className="text-danger">Maglagay ng username.</div>
@@ -234,8 +234,6 @@ const RegisterPage = () => {
               id="farmer"
               value="magsasaka"
               onChange={handleChange}
-              // onClick={() => setRadioBtn("farmer")}
-              // checked={form.role === "magsasaka"}
             />
 
             <label className="form-check-label" htmlFor="farmer">
@@ -250,8 +248,6 @@ const RegisterPage = () => {
               id="supplier"
               value="supplier"
               onChange={handleChange}
-              // onClick={() => setRadioBtn("suplayer")}
-              // checked={form.role === "suplayer"}
             />
 
             <label className="form-check-label" htmlFor="supplier">
@@ -266,8 +262,6 @@ const RegisterPage = () => {
               id="admin"
               value="administrador"
               onChange={handleChange}
-              // onClick={() => setRadioBtn("admin")}
-              // checked={form.role === "admin"}
             />
 
             <label className="form-check-label" htmlFor="admin">
