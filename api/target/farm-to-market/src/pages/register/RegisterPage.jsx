@@ -186,7 +186,7 @@ const RegisterPage = () => {
         </div>
         <div className="row g-2">
           <div className="col-md-6">
-            <label htmlFor="username" className="form-label">
+            <label htmlFor="userName" className="form-label">
               Username
             </label>
             <input
@@ -194,11 +194,11 @@ const RegisterPage = () => {
               className="form-control"
               id="userName"
               name="userName"
-              value={form.username}
+              value={form.userName}
               onChange={handleChange}
               placeholder="jRizal"
             />
-            {errors.username && (
+            {errors.userName && (
               <div className="text-danger">Maglagay ng username.</div>
             )}
           </div>
