@@ -32,7 +32,7 @@ const Profile = () => {
                         <img
                           src=""
                           alt="farmer-avatar"
-                          className="d-block rounded"
+                          className="profilePicture"
                           id="uploadedAvatar"
                           width={"200px"}
                           height={"150px"}
