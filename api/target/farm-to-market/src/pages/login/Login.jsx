@@ -1,20 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import logo from "./wheat_PNG47.png";
 import welcomeimg from "./welcome.jpg";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/actions/auth";
 import Joi from "joi";
+import { login } from "../../services/auth";
+import { toast } from "react-toastify";
 
 function Login() {
   const [formValues, setFormValues] = useState({ userName: "", password: "" });
   const [formErrors, setFormErrors] = useState({});
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(login(formValues));
+    login(formValues).then((res) => {
+      console.log(res, "the response");
+      if (res.data && res.data.status === 1) {
+        localStorage.setItem("ftm", JSON.stringify(res.data));
+        navigate("/dashboard");
+      } else if (res.data && res.data.status === 0) {
+        toast.error(res.data.message);
+      }
+    });
   };
 
   const schema = Joi.object({
