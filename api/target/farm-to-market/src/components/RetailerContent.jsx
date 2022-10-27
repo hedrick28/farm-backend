@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { Route, Routes, Navigate } from "react-router-dom";
-import routes from "../routes/retailer";
+import routes from "../routes/farmer";
 
 const RetailerContent = () => {
   return (
