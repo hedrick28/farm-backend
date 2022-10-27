@@ -11,13 +11,18 @@ import {
 import Dropdown from "react-bootstrap/Dropdown";
 import { getUserInfo } from "../../services/userInf";
 import { useState } from "react";
+import { useEffect } from "react";
 const Header = () => {
-  const [userInfo] = useState(getUserInfo());
+  const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("ftm");
     navigate("/");
   };
+
+  useEffect(() => {
+    setUserInfo(getUserInfo());
+  });
 
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
