@@ -21,7 +21,7 @@ function App() {
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
