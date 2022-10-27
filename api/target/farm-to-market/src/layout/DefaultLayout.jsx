@@ -10,7 +10,7 @@ const AdminLayout = () => {
   const sample = true;
   if (userInfo && userInfo.data.role === "admin") {
     return (
-      <div className="d-flex default-bg">
+      <div className="d-flex">
         <AdminSidebar />
         <AdminContent />
       </div>

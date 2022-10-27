@@ -1,5 +1,5 @@
 .wrapper .sidebar {
-  background: #04b250;
+  background: #ebedf0;
   top: 0;
   left: 0;
   width: 225px;
@@ -20,7 +20,7 @@
   text-decoration: none;
   display: block;
   padding: 13px 0;
-  color: rgb(241, 237, 237);
+  color: #000;
   font-size: 16px;
   position: relative;
   padding-left: 1rem;
@@ -40,7 +40,7 @@
 }
 
 .wrapper .sidebar ul li a .icon {
-  color: #dee4ec;
+  color: #04b250;
   width: 30px;
   display: inline-block;
   @include breakpoint-max(sm) {
@@ -50,9 +50,12 @@
 
 .wrapper .sidebar ul li a:hover,
 .wrapper .sidebar ul li a.active {
-  color: #0c7db1;
-  background: white;
+  color: #fff;
+  background: #04b250;
   border-right: 2px solid rgb(5, 68, 104);
+  .icon {
+    color: #fff !important;
+  }
 }
 
 .wrapper .sidebar ul li a:hover .icon,

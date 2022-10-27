@@ -36,7 +36,7 @@ const AdminSidebar = () => {
                 <FontAwesomeIcon icon={faDashboard} />
               </span>
               <span className={`${toggle ? "show-item" : ""} item`}>
-                My Dashboard
+                Dashboard
               </span>
             </Link>
           </li>
