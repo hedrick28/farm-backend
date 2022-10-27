@@ -2,12 +2,7 @@
 @import "./buttons";
 @import "./header";
 @import "../pages/register/Register.scss";
-
-.student-list-table {
-  @include breakpoint-max(md) {
-    display: none !important;
-  }
-}
+@import "./landing";
 
 .spinner {
   width: 60px;
@@ -111,4 +106,8 @@
   @include breakpoint-max(md) {
     width: 100% !important;
   }
+}
+
+.body-bg {
+  background: #ebedf0;
 }
