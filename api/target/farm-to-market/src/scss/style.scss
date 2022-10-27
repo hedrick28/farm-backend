@@ -3,11 +3,16 @@
 @import "./header";
 @import "../pages/register/Register.scss";
 @import "./landing";
+@import "./sidebar";
 
 .spinner {
   width: 60px;
   height: 60px;
   position: relative;
+}
+
+.f-text-color {
+  color: #04b250;
 }
 
 .spinner .dot {

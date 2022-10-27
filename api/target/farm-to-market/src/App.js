@@ -9,7 +9,9 @@ import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import AddCropPage from "./pages/crop/AddCropPage";
+
 const Landing = React.lazy(() => import("./pages/landing/Landing"));
+const AdminLayout = React.lazy(() => import("./layout/AdminLayout"));
 
 function App() {
   return (
@@ -22,8 +24,9 @@ function App() {
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/addCrop" element={<AddCropPage />} />
+        <Route path="*" element={<AdminLayout />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }

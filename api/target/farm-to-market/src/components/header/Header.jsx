@@ -2,12 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDashboard,
+  faSearch,
+  faUserCheck,
+} from "@fortawesome/free-solid-svg-icons";
+import Dropdown from "react-bootstrap/Dropdown";
 const Header = () => {
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
-      <div className="container-fluid ">
-        <Link className="navbar-brand" to="/">
+      <div className="container">
+        <Link className="navbar-brand" to="">
           <img className="logo" src={logo} />
         </Link>
         <button
@@ -49,6 +54,34 @@ const Header = () => {
               <Link className="nav-link" to="/register">
                 Register
               </Link>
+            </li>
+            <li>
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="success"
+                  id="dropdown-basic"
+                  className="header-profile"
+                >
+                  Jovanie
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="/dashboard">
+                    <FontAwesomeIcon
+                      icon={faDashboard}
+                      className="f-text-color"
+                    />
+                    <span className="ms-2">Dashboard</span>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/profile">
+                    <FontAwesomeIcon
+                      icon={faUserCheck}
+                      className="f-text-color"
+                    />
+                    <span className="ms-2">Profile</span>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </li>
           </ul>
         </div>
