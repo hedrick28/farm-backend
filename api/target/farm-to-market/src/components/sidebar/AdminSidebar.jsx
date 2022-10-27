@@ -20,7 +20,7 @@ const AdminSidebar = () => {
           <div className="hamburger d-flex justify-content-center">
             <Link onClick={() => setToggle(!toggle)}>
               {toggle ? (
-                <FontAwesomeIcon icon={faX} size="2" />
+                <FontAwesomeIcon icon={faX} size="1x" />
               ) : (
                 <FontAwesomeIcon icon={faBars} />
               )}
