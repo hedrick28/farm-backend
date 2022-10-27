@@ -1,8 +1,11 @@
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import {
   faBars,
+  faCartPlus,
   faDashboard,
+  faFileAlt,
   faUsers,
+  faWheatAwn,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +13,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const AdminSidebar = () => {
+const FarmerSidebar = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <div className="wrapper">
@@ -42,58 +45,30 @@ const AdminSidebar = () => {
           <li>
             <Link>
               <span className="icon">
-                <FontAwesomeIcon icon={faUsers} />
+                <FontAwesomeIcon icon={faFileAlt} />
               </span>
               <span className={`${toggle ? "show-item" : ""} item`}>
-                Suppliers
+                My complaints
               </span>
             </Link>
           </li>
           <li>
             <Link>
               <span className="icon">
-                <FontAwesomeIcon icon={faUserCircle} />
+                <FontAwesomeIcon icon={faWheatAwn} />
               </span>
               <span className={`${toggle ? "show-item" : ""} item`}>
-                Farmers
+                My products
               </span>
             </Link>
           </li>
           <li>
             <Link>
               <span className="icon">
-                <i className="fas fa-database"></i>
+                <FontAwesomeIcon icon={faCartPlus} />
               </span>
               <span className={`${toggle ? "show-item" : ""} item`}>
-                Development
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link>
-              <span className="icon">
-                <i className="fas fa-chart-line"></i>
-              </span>
-              <span className={`${toggle ? "show-item" : ""} item`}>
-                Reports
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link>
-              <span className="icon">
-                <i className="fas fa-user-shield"></i>
-              </span>
-              <span className={`${toggle ? "show-item" : ""} item`}>Admin</span>
-            </Link>
-          </li>
-          <li>
-            <Link>
-              <span className="icon">
-                <i className="fas fa-cog"></i>
-              </span>
-              <span className={`${toggle ? "show-item" : ""} item`}>
-                Settings
+                Orders
               </span>
             </Link>
           </li>
@@ -103,4 +78,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default FarmerSidebar;

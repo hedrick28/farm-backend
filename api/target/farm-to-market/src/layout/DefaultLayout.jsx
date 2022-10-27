@@ -4,6 +4,7 @@ import Supplier from "../components/SupplierContent";
 import AdminSidebar from "../components/sidebar/AdminSidebar";
 import Magsasaka from "../components/RetailerContent";
 import { getUserInfo } from "../services/userInf";
+import FarmerSidebar from "../components/sidebar/FarmerSidebar";
 
 const AdminLayout = () => {
   const userInfo = getUserInfo();
@@ -17,7 +18,8 @@ const AdminLayout = () => {
     );
   } else if (userInfo && userInfo.data.role === "magsasaka") {
     return (
-      <div className="d-flex default-bg">
+      <div className="d-flex">
+        <FarmerSidebar />
         <Magsasaka />
       </div>
     );
