@@ -37,8 +37,8 @@
 .header-profile,
 .header-profile:hover,
 .header-profile:focus {
-  color: #000;
-  border: transparent;
-  background: transparent;
+  color: #000 !important;
+  border: transparent !important;
+  background: transparent !important;
   font-size: 18px !important;
 }

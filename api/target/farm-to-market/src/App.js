@@ -11,7 +11,7 @@ import Footer from "./components/footer/Footer";
 import AddCropPage from "./pages/crop/AddCropPage";
 import Profile from "./pages/profile/Profile";
 const Landing = React.lazy(() => import("./pages/landing/Landing"));
-const AdminLayout = React.lazy(() => import("./layout/AdminLayout"));
+const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 
 function App() {
   return (
@@ -24,8 +24,7 @@ function App() {
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/addCrop" element={<AddCropPage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<AdminLayout />} />
+        <Route path="*" element={<DefaultLayout />} />
       </Routes>
       <Footer />
     </BrowserRouter>

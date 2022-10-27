@@ -65,12 +65,8 @@ const Header = () => {
             )}
             <li>
               <Dropdown>
-                <Dropdown.Toggle
-                  variant="success"
-                  id="dropdown-basic"
-                  className="header-profile"
-                >
-                  Jovanie
+                <Dropdown.Toggle id="dropdown-basic" className="header-profile">
+                  {userInfo && userInfo.data.firstName.toUpperCase()}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
