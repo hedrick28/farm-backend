@@ -21,8 +21,12 @@ const Header = () => {
   };
 
   useEffect(() => {
+    info();
+  }, []);
+
+  const info = () => {
     setUserInfo(getUserInfo());
-  }, [getUserInfo()]);
+  };
 
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
