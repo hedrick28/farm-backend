@@ -31,7 +31,7 @@ const AdminSidebar = () => {
       <div className={`${toggle ? "toggle-sidebar" : ""} sidebar`}>
         <ul>
           <li>
-            <Link to="/admin/dashboard" className="active">
+            <Link to="/dashboard">
               <span className="icon">
                 <FontAwesomeIcon icon={faDashboard} />
               </span>
