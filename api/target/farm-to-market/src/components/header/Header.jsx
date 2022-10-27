@@ -8,7 +8,11 @@ import {
   faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
+import { getUserInfo } from "../../services/userInf";
+import { useState } from "react";
 const Header = () => {
+  const [userInfo, setUserInfo] = useState(getUserInfo());
+  console.log(userInfo, "the info");
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
       <div className="container">
@@ -45,16 +49,20 @@ const Header = () => {
             </div>
           </form>
           <ul className="navbar-nav w-100 justify-content-end">
-            <li className="nav-item nav-router-link">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item nav-router-link">
-              <Link className="nav-link" to="/register">
-                Register
-              </Link>
-            </li>
+            {!userInfo && (
+              <>
+                <li className="nav-item nav-router-link">
+                  <Link className="nav-link" to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item nav-router-link">
+                  <Link className="nav-link" to="/register">
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
               <Dropdown>
                 <Dropdown.Toggle
