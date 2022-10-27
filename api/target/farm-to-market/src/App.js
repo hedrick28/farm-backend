@@ -8,6 +8,7 @@ import "./scss/style.scss";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import AddCropPage from "./pages/crop/AddCropPage";
 const Landing = React.lazy(() => import("./pages/landing/Landing"));
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/addCrop" element={<AddCropPage />} />
       </Routes>
       {/* <Footer /> */}
     </BrowserRouter>

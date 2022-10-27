@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../redux/actions/auth";
 import Joi from "joi";
@@ -85,7 +84,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center reg-border">
+    <div className="container m-5 d-flex justify-content-center reg-border">
       <form
         className="row g-3 needs-validation"
         onSubmit={handleSubmit}
@@ -225,7 +224,7 @@ const RegisterPage = () => {
         </div>
         <div className="col-12">Sumali bilang isang (Pumili ng isa) : </div>
 
-        <div className="row d-flex justify-content-center">
+        <div className="row d-flex">
           <div className="form-check col-4">
             <input
               className="form-check-input"
@@ -260,7 +259,7 @@ const RegisterPage = () => {
               type="radio"
               name="role"
               id="admin"
-              value="administrador"
+              value="admin"
               onChange={handleChange}
             />
 
@@ -271,9 +270,9 @@ const RegisterPage = () => {
           {errors.role && <div className="text-danger">Pumili ng isa.</div>}
         </div>
 
-        <div className="col-12 md-10">
+        <div className="col-12 md-10 row d-flex justify-content-center align-content-center">
           <button
-            className="btn btn-f-primary w-100 "
+            className="btn btn-f-primary w-50 mt-3 "
             type="submit"
             disabled={isFormInvalid()}
           >
