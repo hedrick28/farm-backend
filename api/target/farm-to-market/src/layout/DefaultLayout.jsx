@@ -1,8 +1,8 @@
 import React from "react";
 import AdminContent from "../components/AdminContent";
-import Supplier from "../components/RetailerContent";
+import Supplier from "../components/SupplierContent";
 import AdminSidebar from "../components/sidebar/AdminSidebar";
-import Magsasaka from "../components/SupplierContent";
+import Magsasaka from "../components/RetailerContent";
 import { getUserInfo } from "../services/userInf";
 
 const AdminLayout = () => {
@@ -16,11 +16,17 @@ const AdminLayout = () => {
       </div>
     );
   } else if (userInfo && userInfo.data.role === "magsasaka") {
-    <div className="d-flex default-bg">
-      <Magsasaka />
-    </div>;
+    return (
+      <div className="d-flex default-bg">
+        <Magsasaka />
+      </div>
+    );
   } else if (userInfo && userInfo.data.role === "supplier") {
-    <Supplier />;
+    return (
+      <div className="d-flex default-bg">
+        <Supplier />
+      </div>
+    );
   }
 };
 
