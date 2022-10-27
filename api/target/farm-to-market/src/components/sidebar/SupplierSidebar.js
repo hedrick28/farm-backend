@@ -1,17 +1,18 @@
 import {
   faBars,
   faCartPlus,
+  faCommentAlt,
   faDashboard,
-  faFileAlt,
   faWheatAwn,
   faX,
+  faComment,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const FarmerSidebar = () => {
+const SupplierSidebar = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <div className="wrapper">
@@ -43,10 +44,10 @@ const FarmerSidebar = () => {
           <li>
             <Link>
               <span className="icon">
-                <FontAwesomeIcon icon={faFileAlt} />
+                <FontAwesomeIcon icon={faComment} />
               </span>
               <span className={`${toggle ? "show-item" : ""} item`}>
-                My complaints
+                Advertisements
               </span>
             </Link>
           </li>
@@ -76,4 +77,4 @@ const FarmerSidebar = () => {
   );
 };
 
-export default FarmerSidebar;
+export default SupplierSidebar;
