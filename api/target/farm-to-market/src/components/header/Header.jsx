@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDashboard,
+  faRightFromBracket,
   faSearch,
   faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
@@ -11,8 +12,13 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { getUserInfo } from "../../services/userInf";
 import { useState } from "react";
 const Header = () => {
-  const [userInfo, setUserInfo] = useState(getUserInfo());
-  console.log(userInfo, "the info");
+  const [userInfo] = useState(getUserInfo());
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("ftm");
+    navigate("/");
+  };
+
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
       <div className="container">
@@ -83,6 +89,13 @@ const Header = () => {
                       className="f-text-color"
                     />
                     <span className="ms-2">Profile</span>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={handleLogout}>
+                    <FontAwesomeIcon
+                      icon={faRightFromBracket}
+                      className="f-text-color"
+                    />
+                    <span className="ms-2">Logout</span>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
