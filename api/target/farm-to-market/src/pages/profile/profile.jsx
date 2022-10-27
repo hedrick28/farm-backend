@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./profile.scss";
+import { getUserInfo } from "../../services/userInf";
 
 const Profile = () => {
   const [form, setForm] = useState({
@@ -12,6 +13,10 @@ const Profile = () => {
     password: "",
     role: "",
   });
+
+  const [userInfo, setUserInfo] = useState(getUserInfo());
+  console.log(userInfo.data.birthDate);
+
   return (
     <div className="d-flex flex-row justify-content-center">
       <div className="layout-container-page">
@@ -79,6 +84,7 @@ const Profile = () => {
                             disabled={true}
                             id="firstName"
                             name="firstName"
+                            defaultValue={userInfo.data.firstName}
                           />
                         </div>
                         <div className="mb-3 col-md-6">
@@ -91,6 +97,7 @@ const Profile = () => {
                             disabled={true}
                             id="lastName"
                             name="lastName"
+                            defaultValue={userInfo.data.lastName}
                           />
                         </div>
                         <div className="mb-3 col-md-6">
@@ -103,6 +110,7 @@ const Profile = () => {
                             disabled={true}
                             id="mobileNumber"
                             name="mobileNumber"
+                            defaultValue={userInfo.data.mobileNumber}
                           />
                         </div>
                       </div>
@@ -121,6 +129,7 @@ const Profile = () => {
                             className="form-control"
                             id="gender"
                             name="gender"
+                            defaultValue={userInfo.data.gender}
                           />
                         </div>
                         <div className="mb-3 col-md-6">
@@ -132,6 +141,7 @@ const Profile = () => {
                             className="form-control"
                             id="birthDate"
                             name="birthDate"
+                            defaultValue={userInfo.data.birthDate}
                           />
                         </div>
                         <div className="mb-3 col-md-6">
@@ -143,6 +153,7 @@ const Profile = () => {
                             className="form-control"
                             id="email"
                             name="email"
+                            defaultValue={userInfo.data.email}
                           />
                         </div>
                       </div>
