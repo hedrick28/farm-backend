@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { Route, Routes, Navigate } from "react-router-dom";
-import routes from "../supplierroutes";
+import routes from "../routes/supplierroutes";
 
 const SupplierContent = () => {
   return (

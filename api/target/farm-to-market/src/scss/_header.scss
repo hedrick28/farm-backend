@@ -33,3 +33,12 @@
 .nav-router-link:hover {
   text-decoration: underline;
 }
+
+.header-profile,
+.header-profile:hover,
+.header-profile:focus {
+  color: #000;
+  border: transparent;
+  background: transparent;
+  font-size: 18px !important;
+}
