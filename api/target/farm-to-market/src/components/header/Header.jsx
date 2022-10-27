@@ -69,37 +69,42 @@ const Header = () => {
                 </li>
               </>
             )}
-            <li>
-              <Dropdown>
-                <Dropdown.Toggle id="dropdown-basic" className="header-profile">
-                  {userInfo && userInfo.data.firstName.toUpperCase()}
-                </Dropdown.Toggle>
+            {userInfo && (
+              <li>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    id="dropdown-basic"
+                    className="header-profile"
+                  >
+                    {userInfo && userInfo.data.firstName.toUpperCase()}
+                  </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item href="/dashboard">
-                    <FontAwesomeIcon
-                      icon={faDashboard}
-                      className="f-text-color"
-                    />
-                    <span className="ms-2">Dashboard</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="/profile">
-                    <FontAwesomeIcon
-                      icon={faUserCheck}
-                      className="f-text-color"
-                    />
-                    <span className="ms-2">Profile</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={handleLogout}>
-                    <FontAwesomeIcon
-                      icon={faRightFromBracket}
-                      className="f-text-color"
-                    />
-                    <span className="ms-2">Logout</span>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </li>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="/dashboard">
+                      <FontAwesomeIcon
+                        icon={faDashboard}
+                        className="f-text-color"
+                      />
+                      <span className="ms-2">Dashboard</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="/profile">
+                      <FontAwesomeIcon
+                        icon={faUserCheck}
+                        className="f-text-color"
+                      />
+                      <span className="ms-2">Profile</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout}>
+                      <FontAwesomeIcon
+                        icon={faRightFromBracket}
+                        className="f-text-color"
+                      />
+                      <span className="ms-2">Logout</span>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </li>
+            )}
           </ul>
         </div>
       </div>
