@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
       <div className="container-fluid ">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="">
           <img className="logo" src={logo} />
         </Link>
         <button
