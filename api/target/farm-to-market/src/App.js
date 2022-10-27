@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import AddCropPage from "./pages/crop/AddCropPage";
-import Profile from "./pages/profile/Profile";
+import Profile from "./pages/retailer/Profile";
 const Landing = React.lazy(() => import("./pages/landing/Landing"));
 const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 

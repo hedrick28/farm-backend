@@ -1,12 +1,12 @@
-img {
-  border: 2px solid black;
+.profilePicture {
+  border: 2px solid black !important;
 }
 
-.layout-page {
-  overflow: hidden !important;
-  margin-left: 230px;
-  width: 950px;
-}
+// .layout-page {
+//   overflow: hidden !important;
+//   margin-left: 230px;
+//   width: 950px;
+// }
 
 .us-btn-primary {
   font-size: 18px;
@@ -50,7 +50,7 @@ img {
 }
 
 .form-control {
-  border: 2px solid black !important;
+  border: 2px solid black;
   height: 3rem !important;
 }
 
