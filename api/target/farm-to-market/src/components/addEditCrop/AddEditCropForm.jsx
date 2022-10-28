@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
+import { useDispatch } from "react-redux";
+import { addCrop } from "../../redux/actions/crop";
+import { getUserInfo } from "../../services/userInf";
 
 const AddEditCropForm = ({ onSubmit, initialValue }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState(
     initialValue || {
+      cropCategory: "",
       cropName: "",
       cropDescription: "",
       cropPrice: "",
@@ -16,7 +21,10 @@ const AddEditCropForm = ({ onSubmit, initialValue }) => {
     }
   );
 
+  // const userInfo = getUserInfo();
+
   const schema = Joi.object({
+    cropCategory: Joi.string().required(),
     cropName: Joi.string().required(),
     cropDescription: Joi.string().required(),
     cropPrice: Joi.number().min(0.1).required(),
@@ -45,8 +53,9 @@ const AddEditCropForm = ({ onSubmit, initialValue }) => {
   };
 
   const handleSubmit = (event) => {
+    console.log(userInfo);
     event.preventDefault();
-    onSubmit(form);
+    dispatch(addCrop(form));
     // navigate("/admin/products");
   };
 
@@ -66,6 +75,27 @@ const AddEditCropForm = ({ onSubmit, initialValue }) => {
         <h3 className="d-flex justify-content-center mt-4">
           Detalye ng Pananim na Idadagdag
         </h3>
+        <div className="mb-3">
+          <label htmlFor="cropCategory" className="form-label">
+            Uri ng Pananim
+          </label>
+          <select
+            className="form-select"
+            name="cropCategory"
+            id="cropCategory"
+            onChange={handleChange}
+          >
+            <option value="vegetable">Gulay</option>
+            <option value="grains">Butil</option>
+            <option value="fruits">Prutas</option>
+            <option value="root crops">Halamang-ugat</option>
+            <option value="herbal">Halamang-gamot</option>
+            <option value="seeds">Buto na pananim</option>
+          </select>
+          {errors.cropCategory && (
+            <div className="text-danger">Maglagay ng uri ng pananim.</div>
+          )}
+        </div>
         <div className="mb-3">
           <label htmlFor="cropName" className="form-label">
             Pangalan ng Pananim
