@@ -1,0 +1,44 @@
+@import "./mixins";
+.f-bg-primary {
+  background: linear-gradient(-45deg, #04b250 -5%, #fff 60%) !important;
+}
+
+.logo {
+  max-width: 70px;
+}
+
+.logo-container-list {
+  @include breakpoint-max(sm) {
+    display: none;
+  }
+}
+
+.logo-container-brand {
+  display: none;
+  @include breakpoint-max(sm) {
+    display: block;
+  }
+}
+.search-input {
+  @include breakpoint-max(md) {
+    width: 250px;
+  }
+}
+
+.nav-router-link {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.nav-router-link:hover {
+  text-decoration: underline;
+}
+
+.header-profile,
+.header-profile:hover,
+.header-profile:focus {
+  color: #000 !important;
+  border: transparent !important;
+  background: transparent !important;
+  font-size: 18px !important;
+}

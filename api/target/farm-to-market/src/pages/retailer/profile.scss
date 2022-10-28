@@ -1,0 +1,67 @@
+.profilePicture {
+  border: 2px solid black !important;
+}
+
+// .layout-page {
+//   overflow: hidden !important;
+//   margin-left: 230px;
+//   width: 950px;
+// }
+
+.us-btn-primary {
+  font-size: 18px;
+  font-weight: bolder;
+  background-color: #ffc13b !important;
+  border: 2px solid black !important;
+  cursor: pointer;
+}
+
+.us-btn-secondary {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #fff;
+  background-color: #851313 !important;
+  border: 2px solid #3b3b3b !important;
+}
+
+.us-btn-danger {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #fff;
+  background-color: #c31414 !important;
+  border: 2px solid #c31414 !important;
+}
+
+.page-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 20px;
+  margin: 1rem;
+}
+
+.btn-us-primary {
+  background: #ffc836;
+  font-size: larger;
+  font-weight: 500;
+  color: #fff;
+}
+
+.form-control {
+  border: 2px solid black;
+  height: 3rem !important;
+}
+
+.ng-invalid:not(form, .info-group) {
+  border: 2px solid black;
+}
+
+.ng-valid:not(form, .info-group) {
+  border: 2px solid #ffc836 !important;
+}
+
+.bg-us-primary {
+  background: #ffc836 !important;
+}
