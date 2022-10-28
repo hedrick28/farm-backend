@@ -1,10 +1,91 @@
-import React from "react";
+import Joi from "joi";
+import React, { useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { numberOnlyInput } from "../../services/inputService";
+import { getUserInfo } from "../../services/userInf";
+import lodash from "../../services/lodash";
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../../redux/actions/product";
+import { useNavigate } from "react-router-dom";
 
 const ProductForm = () => {
+  const navigate = useNavigate();
+  useSelector((state) => {
+    if (state.product && state.product.status === 1) {
+      navigate("/products");
+    }
+  });
+  const dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
+  const [form, setForm] = useState({
+    productName: "",
+    description: "",
+    price: 0,
+    stock: 0,
+    unit: "",
+    owner: getUserInfo() && getUserInfo().data,
+    image: "",
+  });
+  const schema = Joi.object({
+    productName: Joi.string().required(),
+    description: Joi.string().required(),
+    price: Joi.number().min(1).required(),
+    stock: Joi.number().min(1).required(),
+    unit: Joi.string().required(),
+    image: Joi.string().required(),
+    owner: Joi.object().allow({}).allow().required(),
+  });
+
+  const [imageData, setImageData] = useState(null);
+  const [imagePrev, setImagePrev] = useState(null);
+
+  const handleFileChange = (e) => {
+    e.preventDefault();
+
+    let file = e.target.files[0];
+    var imageData1 = new FormData();
+    imageData1.append("imageFile", file);
+    setImageData(imageData1);
+    setImagePrev(URL.createObjectURL(file));
+    console.log(imageData1);
+    setForm({ ...form, [e.currentTarget.name]: file.name });
+  };
+
+  const handleChange = (e, type = "input") => {
+    if (type === "input") {
+      e.preventDefault();
+    }
+    setForm({ ...form, [e.currentTarget.name]: e.currentTarget.value });
+
+    const { error } = schema
+      .extract(e.currentTarget.name)
+      .label(lodash(e.currentTarget.name))
+      .validate(e.currentTarget.value);
+
+    if (error) {
+      setErrors({
+        ...errors,
+        [e.currentTarget.name]: error.details[0].message,
+      });
+    } else {
+      delete errors[e.currentTarget.name];
+      setErrors(errors);
+    }
+  };
+
+  const isFormInvalid = () => {
+    const result = schema.validate(form);
+    return !!result.error;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(add(imageData, form));
+  };
+
   return (
     <Container className="mt-4 mb-4">
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Card>
           <Card.Header>
             <Card.Title>Add Product</Card.Title>
@@ -16,8 +97,8 @@ const ProductForm = () => {
                   <Col lg={6} className="mb-3">
                     <div className="d-flex align-items-start justify-content-center align-items-sm-center gap-4">
                       <img
-                        src=""
-                        alt="farmer-avatar"
+                        src={imagePrev ? imagePrev : ""}
+                        alt="product"
                         className="profilePicture"
                         id="uploadedAvatar"
                         width={"200px"}
@@ -38,10 +119,12 @@ const ProductForm = () => {
                           typeof="file"
                         >
                           <input
+                            name="image"
+                            accept="image/*"
                             type="file"
                             id="upload"
-                            accept="image/png, image/jpeg"
                             className="account-file-input input-file-upload"
+                            onChange={handleFileChange}
                           />
                         </label>
                       </div>
@@ -60,7 +143,16 @@ const ProductForm = () => {
                   <Form.Label className="text-uppercase fw-bold">
                     Product Name
                   </Form.Label>
-                  <Form.Control type="text" size="1x" />
+                  <Form.Control
+                    type="text"
+                    size="1x"
+                    name="productName"
+                    value={form.productName}
+                    onChange={handleChange}
+                  />
+                  {!!errors.productName && (
+                    <span className="text-danger">{errors.productName}</span>
+                  )}
                 </Form.Group>
               </Col>
               <Col lg={6}>
@@ -68,7 +160,16 @@ const ProductForm = () => {
                   <Form.Label className="text-uppercase fw-bold">
                     Product Description
                   </Form.Label>
-                  <Form.Control type="text" size="1x" />
+                  <Form.Control
+                    type="text"
+                    size="1x"
+                    name="description"
+                    value={form.description}
+                    onChange={handleChange}
+                  />
+                  {!!errors.description && (
+                    <span className="text-danger">{errors.description}</span>
+                  )}
                 </Form.Group>
               </Col>
               <Col lg={6}>
@@ -76,7 +177,17 @@ const ProductForm = () => {
                   <Form.Label className="text-uppercase fw-bold">
                     Price
                   </Form.Label>
-                  <Form.Control type="text" size="1x" />
+                  <Form.Control
+                    name="price"
+                    value={form.value}
+                    type="text"
+                    size="1x"
+                    onKeyPress={(e) => numberOnlyInput(e, 10)}
+                    onChange={handleChange}
+                  />
+                  {!!errors.price && (
+                    <span className="text-danger">{errors.price}</span>
+                  )}
                 </Form.Group>
               </Col>
               <Col lg={6}>
@@ -84,7 +195,17 @@ const ProductForm = () => {
                   <Form.Label className="text-uppercase fw-bold">
                     Stock
                   </Form.Label>
-                  <Form.Control type="text" size="1x" />
+                  <Form.Control
+                    name="stock"
+                    value={form.stock}
+                    type="text"
+                    size="1x"
+                    onKeyPress={(e) => numberOnlyInput(e, 10)}
+                    onChange={handleChange}
+                  />
+                  {!!errors.stock && (
+                    <span className="text-danger">{errors.stock}</span>
+                  )}
                 </Form.Group>
               </Col>
               <Col lg={6}>
@@ -94,21 +215,54 @@ const ProductForm = () => {
                   </Form.Label>
                   <Row>
                     <Col>
-                      <Form.Check type="radio" label="Per Gram(s)" size="1x" />
+                      <Form.Check
+                        value="Per Gram(s)"
+                        type="radio"
+                        name="unit"
+                        checked={form.unit === "Per Gram(s)" ? true : false}
+                        onChange={(e) => handleChange(e, "radio")}
+                        label="Per Gram(s)"
+                        size="1x"
+                      />
                     </Col>
                     <Col>
-                      <Form.Check type="radio" label="Per Kilo" size="1x" />
+                      <Form.Check
+                        name="unit"
+                        checked={form.unit === "Per Kilo" ? true : false}
+                        onChange={(e) => handleChange(e, "radio")}
+                        type="radio"
+                        label="Per Kilo"
+                        size="1x"
+                        value="Per Kilo"
+                      />
                     </Col>
                     <Col>
-                      <Form.Check type="radio" label="Per Piece" size="1x" />
+                      <Form.Check
+                        name="unit"
+                        checked={form.unit === "Per Piece" ? true : false}
+                        onChange={(e) => handleChange(e, "radio")}
+                        type="radio"
+                        label="Per Piece"
+                        size="1x"
+                        value="Per Piece"
+                      />
                     </Col>
                   </Row>
+                  {!!errors.unit && (
+                    <span className="text-danger">{errors.unit}</span>
+                  )}
                 </Form.Group>
               </Col>
             </Row>
           </Card.Body>
           <Card.Footer>
-            <button className="btn btn-f-primary">Submit</button>
+            <button
+              type="submit"
+              disabled={isFormInvalid()}
+              className="btn btn-f-primary"
+            >
+              Submit
+            </button>
           </Card.Footer>
         </Card>
       </Form>
