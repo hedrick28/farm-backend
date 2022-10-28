@@ -10,22 +10,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
 import { getUserInfo } from "../../services/userInf";
-import { useState } from "react";
-import { useEffect } from "react";
 const Header = () => {
-  const [userInfo, setUserInfo] = useState(null);
+  const userInfo = getUserInfo();
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("ftm");
     navigate("/");
-  };
-
-  useEffect(() => {
-    info();
-  }, []);
-
-  const info = () => {
-    setUserInfo(getUserInfo());
   };
 
   return (
