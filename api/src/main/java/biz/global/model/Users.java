@@ -52,5 +52,8 @@ public class Users implements  Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Address> address;
 	
+	@OneToMany(mappedBy = "owner")
+	private List<Products> product;
+	
 	
 }
