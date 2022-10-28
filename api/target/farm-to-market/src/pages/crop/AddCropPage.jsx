@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import AddEditCropForm from "../../components/addEditCrop/AddEditCropForm";
-import { CropContext } from "../../contexts/CropContext";
+import { useDispatch } from "react-redux";
+import { addCrop } from "../../redux/actions/crop";
 
 const AddCropPage = () => {
-  const { onAddCrop } = useContext(CropContext);
-  return <AddEditCropForm onSubmit={onAddCrop} />;
+  const dispatch = useDispatch();
+
+  const handleSubmit = (form) => {
+    dispatch(addCrop(form));
+  };
+
+  return <AddEditCropForm onSubmit={handleSubmit} />;
 };
 
 export default AddCropPage;
