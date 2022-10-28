@@ -10,11 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProductForm = () => {
   const navigate = useNavigate();
-  useSelector((state) => {
-    if (state.product && state.product.status === 1) {
-      navigate("/products");
-    }
-  });
+
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({

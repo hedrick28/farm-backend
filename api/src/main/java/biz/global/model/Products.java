@@ -1,5 +1,6 @@
 package biz.global.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class Products {
 	
 	private String unit;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	private Users owner;
 
 }
