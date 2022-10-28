@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./App.css";
 import Login from "./pages/login/Login";
 import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
@@ -18,14 +18,16 @@ function App() {
     <BrowserRouter>
       <ToastContainer />
       <Header />
-      <Routes>
-        <Route path="/" element={<Landing />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/addCrop" element={<AddCropPage />} />
-        <Route path="*" element={<DefaultLayout />} />
-      </Routes>
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<Landing />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/addCrop" element={<AddCropPage />} />
+          <Route path="*" element={<DefaultLayout />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </BrowserRouter>
   );
