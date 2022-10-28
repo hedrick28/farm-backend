@@ -43,12 +43,11 @@ const Products = () => {
   };
 
   const pagination = paginationFactory({
-    page: 2,
     sizePerPage: 5,
-    lastPageText: ">>",
-    firstPageText: "<<",
-    nextPageText: ">",
-    prePageText: "<",
+    lastPageText: "Last",
+    firstPageText: "First",
+    nextPageText: "Prev",
+    prePageText: "Next",
     showTotal: true,
     alwaysShowAllBtns: true,
     onPageChange: function (page, sizePerPage) {
@@ -78,7 +77,7 @@ const Products = () => {
               columns={columns}
               defaultSorted={defaultSorted}
               rowEvents={rowEvents}
-              // pagination={pagination}
+              pagination={pagination}
             />
           </Card.Body>
         </Card>
