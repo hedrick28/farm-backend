@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
 import Joi from "joi";
+// import { useDispatch } from "react-redux";
+import { getUserInfo } from "../../services/userInf";
 
 const AddEditCropForm = ({ onSubmit, initialValue }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const userInfo = getUserInfo();
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState(
     initialValue || {
+      user_id: userInfo.data.user_id,
+      cropCategory: "",
       cropName: "",
       cropDescription: "",
       cropPrice: "",
@@ -17,13 +22,17 @@ const AddEditCropForm = ({ onSubmit, initialValue }) => {
   );
 
   const schema = Joi.object({
+    user_id: Joi.number().required(),
+    cropCategory: Joi.string().required(),
     cropName: Joi.string().required(),
     cropDescription: Joi.string().required(),
     cropPrice: Joi.number().min(0.1).required(),
     cropQuantityInStock: Joi.number().min(0).required(),
     cropUnit: Joi.string().required(),
-    cropImage: Joi.string().uri().allow("").optional(),
+    cropImage: Joi.any().allow("").optional(),
   });
+
+  // const selectedFile = useRef();
 
   const handleChange = (event) => {
     setForm({ ...form, [event.currentTarget.name]: event.currentTarget.value });
@@ -45,27 +54,45 @@ const AddEditCropForm = ({ onSubmit, initialValue }) => {
   };
 
   const handleSubmit = (event) => {
+    console.log(form);
     event.preventDefault();
     onSubmit(form);
-    // navigate("/admin/products");
+    // navigate("/");
   };
 
   const isFormInvalid = () => {
     const result = schema.validate(form);
-    console.log(result);
     return !!result.error;
   };
 
   return (
     <div className="container m-5 d-flex justify-content-center reg-border">
-      <form
-        className="row g-2needs-validation"
-        onSubmit={handleSubmit}
-        method="post"
-      >
+      <form className="row g-2needs-validation" onSubmit={handleSubmit}>
         <h3 className="d-flex justify-content-center mt-4">
           Detalye ng Pananim na Idadagdag
         </h3>
+        <div className="mb-3">
+          <label htmlFor="cropCategory" className="form-label">
+            Uri ng Pananim
+          </label>
+          <select
+            className="form-select"
+            name="cropCategory"
+            id="cropCategory"
+            onChange={handleChange}
+          >
+            <option>Pumili ng isa...</option>
+            <option value="vegetable">Gulay</option>
+            <option value="grains">Butil</option>
+            <option value="fruits">Prutas</option>
+            <option value="root crops">Halamang-ugat</option>
+            <option value="herbal">Halamang-gamot</option>
+            <option value="seeds">Buto na pananim</option>
+          </select>
+          {errors.cropCategory && (
+            <div className="text-danger">Maglagay ng uri ng pananim.</div>
+          )}
+        </div>
         <div className="mb-3">
           <label htmlFor="cropName" className="form-label">
             Pangalan ng Pananim
@@ -190,7 +217,7 @@ const AddEditCropForm = ({ onSubmit, initialValue }) => {
             Larawan ng Pananim
           </label>
           <input
-            type="text"
+            type="file"
             className="form-control"
             id="cropImage"
             name="cropImage"

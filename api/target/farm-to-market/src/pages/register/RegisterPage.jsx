@@ -75,7 +75,7 @@ const RegisterPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(register(form));
-    //navigate("/");
+    navigate("/login");
   };
 
   const isFormInvalid = () => {
@@ -84,7 +84,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="container m-5 d-flex justify-content-center reg-border">
+    <div className="container mb-5 d-flex justify-content-center reg-border">
       <form
         className="row g-3 needs-validation"
         onSubmit={handleSubmit}
