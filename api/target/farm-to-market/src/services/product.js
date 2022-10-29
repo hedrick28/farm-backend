@@ -5,3 +5,7 @@ const userInfo = getUserInfo();
 export const myProducts = () => {
   return http.get(`/product/myproduct/${userInfo.data.user_id}`);
 };
+
+export const productDetails = (id) => {
+  return http.get(`/product/product/${id}`);
+};
