@@ -35,7 +35,10 @@ const Products = () => {
       formatter: (rowContent, row) => {
         return (
           <div className="d-flex">
-            <Link className="btn btn-info me-2">
+            <Link
+              className="btn btn-info me-2"
+              to={`/product/details/${row.product_id}`}
+            >
               <FontAwesomeIcon icon={faEye} />
             </Link>
             <Link className="btn btn-f-primary me-2">

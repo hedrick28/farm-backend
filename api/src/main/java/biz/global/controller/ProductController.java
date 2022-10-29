@@ -60,5 +60,14 @@ public class ProductController {
 		return products;
 	}
 	
+	@GetMapping(value = "product/{id}")
+	public ResponseEntity<ResponseModel> getProductById(@PathVariable Long id) {
+		Optional<Products> product = productRepo.findById(id);
+		if(product.isEmpty()) {
+			return ResponseEntity.ok().body(new ResponseModel(0, "product does not exist", null));
+		}
+		
+		return ResponseEntity.ok().body(new ResponseModel(1, "product exist", product.get()));
+	}
 
 }

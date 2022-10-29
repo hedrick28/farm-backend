@@ -5,6 +5,7 @@ const EditCropPage = React.lazy(() => import("../pages/crop/EditCropPage"));
 const CropPage = React.lazy(() => import("../pages/crop/CropPage"));
 const AddPRoduct = React.lazy(() => import("../pages/retailer/AddProduct"));
 const Products = React.lazy(() => import("../pages/retailer/Products"));
+const Details = React.lazy(() => import("../pages/retailer/Details"));
 const routes = [
   { path: "/dashboard", exact: true, element: Dashboard },
   { path: "/profile", element: Profile },
@@ -12,6 +13,7 @@ const routes = [
   { path: "/crops", element: CropPage },
   { path: "/product/add", element: AddPRoduct },
   { path: "/products", element: Products },
+  { path: "/product/details/:id", element: Details },
 ];
 
 export default routes;
