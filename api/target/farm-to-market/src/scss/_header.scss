@@ -52,6 +52,10 @@
   overflow: scroll;
 }
 
+.notif::-webkit-scrollbar {
+  display: none;
+}
+
 .notif-item {
   border-bottom: 1px solid gray !important;
   .notif-content {
