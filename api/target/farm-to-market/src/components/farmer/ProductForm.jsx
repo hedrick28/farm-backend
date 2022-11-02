@@ -1,27 +1,23 @@
 import Joi from "joi";
 import React, { useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { numberOnlyInput } from "../../services/inputService";
 import { getUserInfo } from "../../services/userInf";
 import lodash from "../../services/lodash";
-import { useDispatch, useSelector } from "react-redux";
-import { add } from "../../redux/actions/product";
-import { useNavigate } from "react-router-dom";
 
-const ProductForm = () => {
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
+const ProductForm = ({ onSubmit, initialValue }) => {
   const [errors, setErrors] = useState({});
-  const [form, setForm] = useState({
-    productName: "",
-    description: "",
-    price: 0,
-    stock: 0,
-    unit: "",
-    owner: getUserInfo() && getUserInfo().data,
-    image: "",
-  });
+  const [form, setForm] = useState(
+    initialValue || {
+      productName: "",
+      description: "",
+      price: 0,
+      stock: 0,
+      unit: "",
+      owner: getUserInfo() && getUserInfo().data,
+      image: "",
+    }
+  );
   const schema = Joi.object({
     productName: Joi.string().required(),
     description: Joi.string().required(),
@@ -33,7 +29,9 @@ const ProductForm = () => {
   });
 
   const [imageData, setImageData] = useState(null);
-  const [imagePrev, setImagePrev] = useState(null);
+  const [imagePrev, setImagePrev] = useState(
+    initialValue ? require(`../../assets/uploads/${initialValue.image}`) : null
+  );
 
   const handleFileChange = (e) => {
     e.preventDefault();
@@ -76,7 +74,7 @@ const ProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(add(imageData, form));
+    onSubmit(imageData, form);
   };
 
   return (
@@ -84,7 +82,9 @@ const ProductForm = () => {
       <Form onSubmit={handleSubmit}>
         <Card>
           <Card.Header>
-            <Card.Title>Add Product</Card.Title>
+            <Card.Title>
+              {initialValue ? "Edit Product" : "Add Product"}
+            </Card.Title>
           </Card.Header>
           <Card.Body>
             <Row>
@@ -175,7 +175,7 @@ const ProductForm = () => {
                   </Form.Label>
                   <Form.Control
                     name="price"
-                    value={form.value}
+                    value={form.price}
                     type="text"
                     size="1x"
                     onKeyPress={(e) => numberOnlyInput(e, 10)}

@@ -2,6 +2,7 @@ import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import {
   faBars,
   faDashboard,
+  faLightbulb,
   faUsers,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
@@ -60,13 +61,11 @@ const AdminSidebar = () => {
             </Link>
           </li>
           <li>
-            <Link>
+            <Link to="/tips">
               <span className="icon">
-                <i className="fas fa-database"></i>
+                <FontAwesomeIcon icon={faLightbulb} />
               </span>
-              <span className={`${toggle ? "show-item" : ""} item`}>
-                Development
-              </span>
+              <span className={`${toggle ? "show-item" : ""} item`}>Tips</span>
             </Link>
           </li>
           <li>

@@ -38,6 +38,10 @@ public class Products {
 	
 	private String unit;
 	
+	private Boolean active = true;
+	
+	private int sold = 0;
+	
 	@ManyToOne
 	private Users owner;
 
