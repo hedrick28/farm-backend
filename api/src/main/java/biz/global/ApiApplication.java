@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication(scanBasePackages = {"biz.global"}, exclude = { SecurityAutoConfiguration.class } )
 @EnableJpaRepositories("biz.global.repo")
 @EnableTransactionManagement
-//@EntityScan("biz.global.model")
+@EntityScan("biz.global.model")
 public class ApiApplication {
 
 	public static void main(String[] args) {
