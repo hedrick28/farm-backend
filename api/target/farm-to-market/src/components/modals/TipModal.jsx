@@ -4,10 +4,15 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { tipModal } from "../../redux/actions/tipModal";
+import { getUserInfo } from "../../services/userInf";
 
-const TipModal = ({ content }) => {
+const TipModal = ({ content, onDelete }) => {
   const dispatch = useDispatch();
   const isShow = useSelector((state) => state.tip);
+  const handleDeleteTip = () => {
+    onDelete(content.tip_id, getUserInfo().data.role);
+    dispatch(tipModal(false));
+  };
   return (
     <Modal show={isShow}>
       <Modal.Header>
@@ -26,7 +31,9 @@ const TipModal = ({ content }) => {
         >
           Cancel
         </button>
-        <button className="btn btn-danger">Delete</button>
+        <button className="btn btn-danger" onClick={handleDeleteTip}>
+          Delete
+        </button>
       </Modal.Footer>
     </Modal>
   );

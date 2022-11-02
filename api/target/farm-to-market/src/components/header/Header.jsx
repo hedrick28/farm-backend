@@ -19,6 +19,7 @@ import { Card } from "react-bootstrap";
 import TipModal from "../modals/TipModal";
 import { useDispatch } from "react-redux";
 import { tipModal } from "../../redux/actions/tipModal";
+import { deleteTip } from "../../redux/actions/tip";
 const Header = () => {
   const [notif, setNotif] = useState(null);
   const [tipModalContent, setTipModalContent] = useState(null);
@@ -42,7 +43,6 @@ const Header = () => {
 
   const handleTipOnClick = (data) => {
     seenTip(data.tip_id).then((res) => {
-      console.log(res);
       if (res.data && res.data.status === 1) {
         dispatch(tipModal(true));
         setTipModalContent(data);
@@ -50,9 +50,15 @@ const Header = () => {
     });
   };
 
+  const handleDeleteTip = (id, data) => {
+    dispatch(deleteTip(id, data));
+  };
+
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
-      {tipModalContent && <TipModal content={tipModalContent} />}
+      {tipModalContent && (
+        <TipModal content={tipModalContent} onDelete={handleDeleteTip} />
+      )}
 
       <div className="container">
         <Link className="navbar-brand" to="">
@@ -106,7 +112,7 @@ const Header = () => {
               <>
                 <li className="d-flex justify-content-center align-items-center me-4">
                   <Link className="badge">
-                    <FontAwesomeIcon icon={faBell} color="#3b4bff" size="2x" />
+                    <FontAwesomeIcon icon={faBell} color="#30830c" size="2x" />
                     <span className="badge bg-danger">1</span>
                   </Link>
                 </li>
@@ -114,7 +120,7 @@ const Header = () => {
                   <Link className="badge">
                     <FontAwesomeIcon
                       icon={faMessage}
-                      color="#3b4bff"
+                      color="#30830c"
                       size="2x"
                     />
                     <span className="badge bg-danger">1</span>
@@ -140,7 +146,7 @@ const Header = () => {
                           <FontAwesomeIcon
                             icon={faLightbulb}
                             size="2x"
-                            color="#3b4bff"
+                            color="#30830c"
                           />
                           {notif && notif.tipSize > 0 && (
                             <span className="badge bg-danger">

@@ -33,7 +33,7 @@ const Products = () => {
     { dataField: "description", text: "Description", sort: true },
     { dataField: "price", text: "Price", sort: true },
     { dataField: "stock", text: "Stock", sort: true },
-    { dataField: "unit", text: "unit", sort: true },
+    { dataField: "unit", text: "Unit", sort: true },
     {
       dataField: "link",
       text: "Actions",

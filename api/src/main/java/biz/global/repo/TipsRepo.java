@@ -9,7 +9,7 @@ import biz.global.model.Tips;
 
 public interface TipsRepo extends JpaRepository<Tips, Long> {
 	
-	@Query(nativeQuery = true, value = "select *from tips where respondent_user_id = ?1 or everyone = true order by tip_id asc;")
+	@Query(nativeQuery = true, value = "select *from tips where (respondent_user_id = ?1 or everyone = true) and delete_respondent_side <> true order by tip_id desc;")
 	List<Tips> findTips(Long id);
 	
 	@Query(nativeQuery = true, value = "select *from tips where owner_user_id = ?1 and delete_owner_side = false")
