@@ -18,6 +18,8 @@ public class NotifResponseModel {
 	
 	private int tipSize;
 	
+	private Tips tip;
+	
 	public NotifResponseModel(int status, String message, int tipSize, List<Tips> tips) {
 		this.tips = tips;
 		this.message = message;
@@ -30,6 +32,12 @@ public class NotifResponseModel {
 		this.message = message;
 	}
 	
+	
+	public NotifResponseModel(int status, String message, Tips tip) {
+		this.status = status;
+		this.message = message;
+		this.tip = tip;
+	}
 	
 	
 }

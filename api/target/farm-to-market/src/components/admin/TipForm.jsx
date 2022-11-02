@@ -7,16 +7,18 @@ import { allUsers } from "../../services/user";
 import lodash from "../../services/lodash";
 import { getUserInfo } from "../../services/userInf";
 
-const TipForm = ({ onSubmit }) => {
+const TipForm = ({ onSubmit, initialValue }) => {
   const [users, setUsers] = useState(null);
   const [errors, setErrors] = useState({});
-  const [tip, setTip] = useState({
-    title: "",
-    content: "",
-    respondent: {},
-    owner: getUserInfo() && getUserInfo().data,
-    everyone: true,
-  });
+  const [tip, setTip] = useState(
+    initialValue || {
+      title: "",
+      content: "",
+      respondent: {},
+      owner: getUserInfo() && getUserInfo().data,
+      everyone: true,
+    }
+  );
   useEffect(() => {
     allUsers().then((res) => {
       if (res.data) {
@@ -88,7 +90,9 @@ const TipForm = ({ onSubmit }) => {
         <Col lg={6}>
           <Card>
             <Card.Header>
-              <Card.Title>Create Tip</Card.Title>
+              <Card.Title>
+                {initialValue ? "Edit Tip" : "Create Tip"}
+              </Card.Title>
             </Card.Header>
             <Form onSubmit={handleSubmit}>
               <Card.Body>
@@ -105,12 +109,13 @@ const TipForm = ({ onSubmit }) => {
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Content</Form.Label>
+
                   <textarea
                     name="content"
                     value={tip.content}
                     onChange={handleChange}
                     className="form-control"
-                    col={10}
+                    rows="8"
                   ></textarea>
                   {!!errors.content && (
                     <span className="text-danger">{errors.content}</span>

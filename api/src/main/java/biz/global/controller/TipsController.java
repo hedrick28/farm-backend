@@ -87,4 +87,13 @@ public class TipsController {
 		tipsRepo.save(tip.get());
 		return ResponseEntity.ok().body(new NotifResponseModel(1, "Tip has been deleted"));
 	}
+	
+	@GetMapping(value ="details/{id}")
+	public ResponseEntity<NotifResponseModel> getTip(@PathVariable Long id) {
+		Optional<Tips> tip = tipsRepo.findById(id);
+		if(tip.isEmpty()) {
+			return ResponseEntity.ok().body(new NotifResponseModel(0, "Tip does not exist"));
+		}
+		return ResponseEntity.ok().body(new NotifResponseModel(1, "exist", tip.get()));
+	}
 }

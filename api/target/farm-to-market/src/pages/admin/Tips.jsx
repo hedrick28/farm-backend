@@ -11,23 +11,37 @@ import { Link } from "react-router-dom";
 import { getOwnerTips } from "../../services/tips";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
+import { useDispatch } from "react-redux";
+import { deleteTip } from "../../redux/actions/tip";
+import { getUserInfo } from "../../services/userInf";
 
 const Tips = () => {
   const [tips, setTips] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    getAllTips();
+  }, []);
+
+  const handleDeleteTip = (id) => {
+    dispatch(deleteTip(id, getUserInfo().data.role));
+    setTimeout(() => {
+      getAllTips();
+    }, 200);
+  };
+
+  const getAllTips = () => {
     getOwnerTips().then((res) => {
       if (res.data && res.data.status === 1) {
         setTips(res.data.tips);
       }
     });
-  }, []);
+  };
   const columns = [
     { dataField: "tip_id", text: "Tip ID", hidden: true },
     { dataField: "title", text: "Title", sort: true },
     { dataField: "content", text: "Content", sort: true },
-    { dataField: "seen", text: "Status", sort: true },
-    { dataField: "respondent.firstName ", text: "Respondent", sort: true },
+
     {
       dataField: "link",
       text: "Actions",
@@ -46,7 +60,10 @@ const Tips = () => {
             >
               <FontAwesomeIcon icon={faPencil} />
             </Link>
-            <button className="btn btn-danger me-2">
+            <button
+              className="btn btn-danger me-2"
+              onClick={() => handleDeleteTip(row.tip_id)}
+            >
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
           </div>
@@ -55,19 +72,12 @@ const Tips = () => {
     },
   ];
 
-  const defaultSorted = [
-    {
-      dataField: "title",
-      order: "desc",
-    },
-  ];
-
   const pagination = paginationFactory({
     sizePerPage: 5,
     lastPageText: "Last",
     firstPageText: "First",
-    nextPageText: "Prev",
-    prePageText: "Next",
+    nextPageText: "Next",
+    prePageText: "Prev",
     showTotal: true,
     alwaysShowAllBtns: true,
     onPageChange: function (page, sizePerPage) {
@@ -82,7 +92,7 @@ const Tips = () => {
   if (tips) {
     return (
       <div className="container mb-4 mt-4">
-        <Row>
+        <Row className="mb-4">
           <Col lg={2}>
             <Link className="btn btn-f-primary w-100" to="/create/tip">
               <FontAwesomeIcon icon={faPlusSquare} />
@@ -101,7 +111,6 @@ const Tips = () => {
               keyField="tip_id"
               data={tips}
               columns={columns}
-              defaultSorted={defaultSorted}
               // rowEvents={rowEvents}
               pagination={pagination}
             ></BootstrapTable>
