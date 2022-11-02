@@ -5,7 +5,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,6 +70,18 @@ public class ProductController {
 		}
 		
 		return ResponseEntity.ok().body(new ResponseModel(1, "product exist", product.get()));
+	}
+	
+	@DeleteMapping(value = "delete/{id}")
+	public ResponseEntity<ResponseModel> delete(@PathVariable Long id) {
+		Optional<Products> product = productRepo.findById(id);
+		if(product.isEmpty()) {
+			return ResponseEntity.ok().body(new ResponseModel(0, "product does not exist", null));
+		}
+		
+		product.get().setActive(false);
+		productRepo.save(product.get());
+		return ResponseEntity.ok().body(new ResponseModel(1, "product has been deleted", null));
 	}
 
 }

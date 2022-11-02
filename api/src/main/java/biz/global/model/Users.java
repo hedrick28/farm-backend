@@ -62,5 +62,14 @@ public class Users implements  Serializable {
 	@OneToMany(mappedBy = "owner")
 	private List<Products> product = new ArrayList<>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner")
+	private List<Tips> tips = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "respondent")
+	private List<Tips> tip = new ArrayList<>();
+	
+	
 	
 }

@@ -9,3 +9,7 @@ export const myProducts = () => {
 export const productDetails = (id) => {
   return http.get(`/product/product/${id}`);
 };
+
+export const productDelete = (id) => {
+  return http.delete(`/product/delete/${id}`);
+};
