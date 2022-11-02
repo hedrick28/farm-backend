@@ -39,7 +39,7 @@ const Header = () => {
         }
       });
     }
-  });
+  }, []);
 
   const handleTipOnClick = (data) => {
     seenTip(data.tip_id).then((res) => {
@@ -126,18 +126,7 @@ const Header = () => {
                     <span className="badge bg-danger">1</span>
                   </Link>
                 </li>
-                {/* <li className="d-flex justify-content-center align-items-center me-4">
-                  <Link className="badge">
-                    <FontAwesomeIcon
-                      icon={faLightbulb}
-                      color="#3b4bff"
-                      size="2x"
-                    />
-                    <span className="badge bg-danger">
-                      {notif && notif.tipSize}
-                    </span>
-                  </Link>
-                </li> */}
+
                 {notif && (
                   <li>
                     <Dropdown>

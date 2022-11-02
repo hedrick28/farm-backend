@@ -82,16 +82,6 @@ const Products = () => {
     });
   };
 
-  const rowEvents = {
-    onClick: (e, row, rowIndex) => {
-      console.log(e, row, "hey");
-      console.log(`clicked on row with index: ${rowIndex}`);
-    },
-    onMouseEnter: (e, row, rowIndex) => {
-      console.log(`enter on row with index: ${rowIndex}`);
-    },
-  };
-
   const pagination = paginationFactory({
     sizePerPage: 5,
     lastPageText: "Last",

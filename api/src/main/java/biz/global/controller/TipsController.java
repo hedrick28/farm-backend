@@ -67,8 +67,9 @@ public class TipsController {
 		return ResponseEntity.ok().body(new NotifResponseModel(1, "Tip seen"));
 	}
 	
+	@GetMapping(value = "mytips/{id}")
 	public ResponseEntity<NotifResponseModel> getAll(@PathVariable Long id) {
-		List<Tips> tips = tipsRepo.findAll();
+		List<Tips> tips = tipsRepo.findOwnerTips(id);
 		return ResponseEntity.ok().body(new NotifResponseModel(1, "success", tips.size(), tips));
 	}
 	
