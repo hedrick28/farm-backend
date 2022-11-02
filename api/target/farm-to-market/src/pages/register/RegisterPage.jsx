@@ -91,11 +91,11 @@ const RegisterPage = () => {
         method="post"
       >
         <h3 className="d-flex justify-content-center mt-4">
-          Gumawa ng Account
+          Create an Account
         </h3>
         <div className="col-md-4">
           <label htmlFor="firstName" className="form-label">
-            Unang Pangalan
+            First Name
           </label>
           <input
             type="text"
@@ -107,12 +107,12 @@ const RegisterPage = () => {
             placeholder="Jose"
           />
           {errors.firstName && (
-            <div className="text-danger">Maglagay ng unang pangalan.</div>
+            <div className="text-danger">First name is required.</div>
           )}
         </div>
         <div className="col-md-4">
           <label htmlFor="lastName" className="form-label">
-            Apelyido
+            Surname
           </label>
           <input
             type="text"
@@ -124,12 +124,12 @@ const RegisterPage = () => {
             placeholder="Rizal"
           />
           {errors.lastName && (
-            <div className="text-danger">Maglagay ng apelyido.</div>
+            <div className="text-danger">Surname is required.</div>
           )}
         </div>
         <div className="col-md-4">
           <label htmlFor="birthDate" className="form-label">
-            Kapanganakan
+            Birthday
           </label>
           <input
             type="date"
@@ -141,8 +141,8 @@ const RegisterPage = () => {
           />
           {errors.birthDate && (
             <div className="text-danger">
-              Maglagay ng kaarawan. Siguraduhin na ikaw ay nasa hustong edad
-              para gumawa ng account.
+              Birthday is required. Only ages 15 and above are allowed to create
+              an account.
             </div>
           )}
         </div>
@@ -151,7 +151,7 @@ const RegisterPage = () => {
           <div className="col-md-6">
             <div className="form-group">
               <label htmlFor="mobileNumber" className="form-label">
-                Numero ng cellphone
+                Mobile number.
               </label>
               <input
                 type="text"
@@ -163,15 +163,13 @@ const RegisterPage = () => {
                 placeholder="09163412345"
               />
               {errors.mobileNumber && (
-                <div className="text-danger">
-                  Maglagay ng numero ng cellphone.
-                </div>
+                <div className="text-danger">Mobile number is required.</div>
               )}
             </div>
           </div>
           <div className="col-md-6">
             <label htmlFor="emailAddress" className="form-label">
-              Email Address (opsyonal)
+              Email Address (optional)
             </label>
             <input
               type="text"
@@ -198,7 +196,9 @@ const RegisterPage = () => {
               placeholder="jRizal1234"
             />
             {errors.userName && (
-              <div className="text-danger">Maglagay ng username.</div>
+              <div className="text-danger">
+                Username is required (minimum of 7 characters).
+              </div>
             )}
           </div>
           <div className="col-md-6">
@@ -216,13 +216,12 @@ const RegisterPage = () => {
             />
             {errors.password && (
               <div className="text-danger">
-                Maglagay ng password. 7 ang pinakamababang kumbinasyon ng numero
-                at alpabeto ang pwedeng gamitin.
+                Password is required (minimum of 7 characters).
               </div>
             )}
           </div>
         </div>
-        <div className="col-12">Sumali bilang isang (Pumili ng isa) : </div>
+        <div className="col-12">I am a (choose one) : </div>
 
         <div className="row d-flex">
           <div className="form-check col-4">
@@ -231,12 +230,12 @@ const RegisterPage = () => {
               type="radio"
               name="role"
               id="farmer"
-              value="magsasaka"
+              value="farmer"
               onChange={handleChange}
             />
 
             <label className="form-check-label" htmlFor="farmer">
-              Magsasaka
+              Farmer
             </label>
           </div>
           <div className="form-check col-4">
@@ -250,24 +249,10 @@ const RegisterPage = () => {
             />
 
             <label className="form-check-label" htmlFor="supplier">
-              Suplayer
+              Supplier
             </label>
           </div>
-          <div className="form-check col-4">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="role"
-              id="admin"
-              value="admin"
-              onChange={handleChange}
-            />
-
-            <label className="form-check-label" htmlFor="admin">
-              Administrador
-            </label>
-          </div>
-          {errors.role && <div className="text-danger">Pumili ng isa.</div>}
+          {errors.role && <div className="text-danger">Choose one.</div>}
         </div>
 
         <div className="col-12 md-10 row d-flex justify-content-center align-content-center">
@@ -276,7 +261,7 @@ const RegisterPage = () => {
             type="submit"
             disabled={isFormInvalid()}
           >
-            Isumite
+            Submit
           </button>
         </div>
       </form>

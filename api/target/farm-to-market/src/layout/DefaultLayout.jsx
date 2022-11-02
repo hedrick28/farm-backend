@@ -2,7 +2,7 @@ import React from "react";
 import AdminContent from "../components/AdminContent";
 import Supplier from "../components/SupplierContent";
 import AdminSidebar from "../components/sidebar/AdminSidebar";
-import Magsasaka from "../components/RetailerContent";
+import Farmer from "../components/RetailerContent";
 import { getUserInfo } from "../services/userInf";
 import FarmerSidebar from "../components/sidebar/FarmerSidebar";
 import SupplierSidebar from "../components/sidebar/SupplierSidebar";
@@ -17,11 +17,11 @@ const AdminLayout = () => {
         <AdminContent />
       </div>
     );
-  } else if (userInfo && userInfo.data.role === "magsasaka") {
+  } else if (userInfo && userInfo.data.role === "farmer") {
     return (
       <div className="d-flex">
         <FarmerSidebar />
-        <Magsasaka />
+        <Farmer />
       </div>
     );
   } else if (userInfo && userInfo.data.role === "supplier") {
