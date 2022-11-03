@@ -80,7 +80,7 @@ public class Users implements  Serializable {
 	private Cart cartBuyer;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy = "seller")
+	@OneToOne(mappedBy = "seller",cascade = CascadeType.ALL, orphanRemoval = true)
 	private Cart cartSeller;
 	
 	
