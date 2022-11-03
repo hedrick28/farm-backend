@@ -13,3 +13,7 @@ export const productDetails = (id) => {
 export const productDelete = (id) => {
   return http.delete(`/product/delete/${id}`);
 };
+
+export const allProducts = () => {
+  return http.get("product/all");
+};

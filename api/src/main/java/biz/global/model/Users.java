@@ -53,9 +53,13 @@ public class Users implements  Serializable {
 	
 	private String gender;
 	
+	private String mobile;
+	
+	private String profile;
+	
 	private Boolean activeDeactive = false;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Address> address = new ArrayList<>();
 	
 	@JsonIgnore

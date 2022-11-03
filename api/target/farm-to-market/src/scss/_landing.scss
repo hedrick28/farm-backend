@@ -47,4 +47,13 @@
 
 .card-text-f {
   font-size: 12px;
+  height: 50px;
+  overflow: hidden;
+}
+.product-link {
+  text-decoration: none;
+  color: unset;
+}
+.product-image {
+  height: 152px !important;
 }
