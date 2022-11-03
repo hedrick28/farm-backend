@@ -41,7 +41,6 @@ const ProductForm = ({ onSubmit, initialValue }) => {
     imageData1.append("imageFile", file);
     setImageData(imageData1);
     setImagePrev(URL.createObjectURL(file));
-    console.log(imageData1);
     setForm({ ...form, [e.currentTarget.name]: file.name });
   };
 

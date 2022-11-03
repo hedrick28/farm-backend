@@ -12,7 +12,6 @@ const Details = () => {
   const [product, setProduct] = useState(null);
   useEffect(() => {
     productDetails(+param.id).then((res) => {
-      console.log(res.data.data);
       if (res.data && res.data.status === 1) {
         setProduct(res.data.data);
       } else if (res.data && res.data.status === 0) {

@@ -11,6 +11,9 @@ import Footer from "./components/footer/Footer";
 import Profile from "./pages/retailer/Profile";
 const Landing = React.lazy(() => import("./pages/landing/Landing"));
 const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
+const ProductDetails = React.lazy(() =>
+  import("./pages/product/ProductDetails")
+);
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
           <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<DefaultLayout />} />
+          <Route path="/details/product/:id" element={<ProductDetails />} />
         </Routes>
       </Suspense>
       <Footer />

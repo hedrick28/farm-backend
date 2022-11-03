@@ -83,5 +83,12 @@ public class ProductController {
 		productRepo.save(product.get());
 		return ResponseEntity.ok().body(new ResponseModel(1, "product has been deleted", null));
 	}
+	
+	@GetMapping(value="all")
+	public List<Products> getAllProducts() {
+		return productRepo.findAll();
+	}
+	
+	
 
 }
