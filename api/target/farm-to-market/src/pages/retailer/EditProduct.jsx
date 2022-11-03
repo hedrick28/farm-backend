@@ -28,6 +28,8 @@ const EditProduct = () => {
       stock,
       image,
       owner,
+      category,
+      shippingFee,
     } = product;
 
     const handleSubmit = (image, data) => {
@@ -49,6 +51,8 @@ const EditProduct = () => {
             stock,
             image,
             owner,
+            category,
+            shippingFee,
           }}
           onSubmit={handleSubmit}
         />

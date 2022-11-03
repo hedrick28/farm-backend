@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,6 +27,8 @@ public class Products {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long product_id;
 	
+	private String category;
+	
 	private String productName;
 	
 	private String description;
@@ -42,7 +45,13 @@ public class Products {
 	
 	private int sold = 0;
 	
+	private Double shippingFee;
+	
 	@ManyToOne
 	private Users owner;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "product")
+	private Cart cart;
 
 }
