@@ -35,7 +35,7 @@ const Recommended = () => {
           <div className="card-body">
             <div className="row">
               {products.map((product, idx) => (
-                <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={idx}>
                   <Link
                     className="product-link"
                     onClick={(e) => handleProductDetails(e, product.product_id)}

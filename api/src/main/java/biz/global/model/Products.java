@@ -26,6 +26,8 @@ public class Products {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long product_id;
 	
+	private String category;
+	
 	private String productName;
 	
 	private String description;
@@ -41,6 +43,8 @@ public class Products {
 	private Boolean active = true;
 	
 	private int sold = 0;
+	
+	private Double shippingFee;
 	
 	@ManyToOne
 	private Users owner;

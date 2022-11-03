@@ -9,6 +9,7 @@ const ProductForm = ({ onSubmit, initialValue }) => {
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState(
     initialValue || {
+      category: "",
       productName: "",
       description: "",
       price: 0,
@@ -16,13 +17,16 @@ const ProductForm = ({ onSubmit, initialValue }) => {
       unit: "",
       owner: getUserInfo() && getUserInfo().data,
       image: "",
+      shippingFee: 0,
     }
   );
   const schema = Joi.object({
+    category: Joi.string().required(),
     productName: Joi.string().required(),
     description: Joi.string().required(),
     price: Joi.number().min(1).required(),
     stock: Joi.number().min(1).required(),
+    shippingFee: Joi.number().min(1).required(),
     unit: Joi.string().required(),
     image: Joi.string().required(),
     owner: Joi.object().allow({}).allow().required(),
@@ -68,6 +72,7 @@ const ProductForm = ({ onSubmit, initialValue }) => {
 
   const isFormInvalid = () => {
     const result = schema.validate(form);
+    console.log(result);
     return !!result.error;
   };
 
@@ -133,6 +138,26 @@ const ProductForm = ({ onSubmit, initialValue }) => {
             </Row>
 
             <Row className="mt-4">
+              <Col lg={6}>
+                <Form.Group>
+                  <Form.Label>Category</Form.Label>
+                  <Form.Select
+                    name="category"
+                    value={form.category}
+                    onChange={handleChange}
+                  >
+                    <option value=""></option>
+                    <option value="root crops">Root Crops</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="grains">Grains</option>
+                    <option value="seeds">Seeds</option>
+                  </Form.Select>
+                  {!!errors.category && (
+                    <span className="text-danger">{errors.category}</span>
+                  )}
+                </Form.Group>
+              </Col>
               <Col lg={6}>
                 <Form.Group className="mb-3">
                   <Form.Label className="text-uppercase fw-bold">
@@ -200,6 +225,24 @@ const ProductForm = ({ onSubmit, initialValue }) => {
                   />
                   {!!errors.stock && (
                     <span className="text-danger">{errors.stock}</span>
+                  )}
+                </Form.Group>
+              </Col>
+              <Col lg={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label className="text-uppercase fw-bold">
+                    Shipping Fee
+                  </Form.Label>
+                  <Form.Control
+                    name="shippingFee"
+                    value={form.shippingFee}
+                    type="text"
+                    size="1x"
+                    onKeyPress={(e) => numberOnlyInput(e, 10)}
+                    onChange={handleChange}
+                  />
+                  {!!errors.shippingFee && (
+                    <span className="text-danger">{errors.shippingFee}</span>
                   )}
                 </Form.Group>
               </Col>
