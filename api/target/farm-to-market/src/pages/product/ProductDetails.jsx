@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { addToCart } from "../../services/cart";
 import { productDetails } from "../../services/product";
 import { getUserInfo } from "../../services/userInf";
 
@@ -22,8 +24,6 @@ const ProductDetails = () => {
     productDetails(+param.id).then((res) => {
       if (res.data && res.data.status === 1) {
         setProduct(res.data.data);
-      } else if (res.data && res.data.status === 0) {
-        //navigate("/products");
       }
     });
   }, [param]);
@@ -38,6 +38,34 @@ const ProductDetails = () => {
       return setQty(1);
     }
     return setQty(qty - 1);
+  };
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    if (e.currentTarget.value > product.stock) {
+      return setQty(product.stock);
+    } else if (e.currentTarget.value === "") {
+      return setQty(1);
+    }
+    setQty(e.currentTarget.value);
+  };
+
+  const handleAddToCart = () => {
+    const cartData = {
+      quantity: qty,
+      product,
+      buyer: getUserInfo().data,
+      seller: product.owner,
+      total: qty * product.price,
+    };
+
+    addToCart(cartData).then((res) => {
+      if (res.data && res.data.status === 1) {
+        toast.success(res.data.message);
+      } else {
+        alert("An unexpected error occurred");
+      }
+    });
   };
   if (product) {
     return (
@@ -102,7 +130,11 @@ const ProductDetails = () => {
                       >
                         <FontAwesomeIcon icon={faMinus} />
                       </button>
-                      <input className="q-counter" value={qty} />
+                      <input
+                        className="q-counter"
+                        value={qty}
+                        onChange={handleOnChange}
+                      />
                       <button
                         className="q-counter-btn"
                         onClick={handleQuantityPlus}
@@ -113,14 +145,17 @@ const ProductDetails = () => {
                   </div>
                 </div>
                 <Row className="mt-2 mb-2">
-                  <Col lg={6}>
-                    <button className="btn btn-outline-warning w-100">
+                  <Col lg={6} className="mb-3">
+                    <button
+                      className="btn btn-warning w-100"
+                      onClick={handleAddToCart}
+                    >
                       <FontAwesomeIcon icon={faCartPlus} className="me-2" />
                       <span>Add To Cart</span>
                     </button>
                   </Col>
-                  <Col lg={6}>
-                    <button className="btn btn-outline-success w-100">
+                  <Col lg={6} className="mb-3">
+                    <button className="btn btn-f-primary w-100">
                       <FontAwesomeIcon
                         icon={faMoneyBill1Wave}
                         className="me-2"

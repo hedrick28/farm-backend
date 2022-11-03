@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -73,6 +74,14 @@ public class Users implements  Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "respondent")
 	private List<Tips> tip = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "buyer")
+	private Cart cartBuyer;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "seller")
+	private Cart cartSeller;
 	
 	
 	
