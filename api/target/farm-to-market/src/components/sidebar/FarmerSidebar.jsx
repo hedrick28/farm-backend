@@ -51,7 +51,7 @@ const FarmerSidebar = () => {
             </Link>
           </li>
           <li>
-            <Link>
+            <Link to="/products">
               <span className="icon">
                 <FontAwesomeIcon icon={faWheatAwn} />
               </span>

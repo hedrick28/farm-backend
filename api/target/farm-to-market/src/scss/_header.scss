@@ -42,3 +42,36 @@
   background: transparent !important;
   font-size: 18px !important;
 }
+
+.notif-dropdown::after {
+  display: none !important;
+}
+
+.notif {
+  max-height: 220px;
+  overflow: scroll;
+}
+
+.notif::-webkit-scrollbar {
+  display: none;
+}
+
+.notif-item {
+  border-bottom: 1px solid gray !important;
+  .notif-content {
+    div {
+      text-transform: capitalize;
+      font-weight: 500;
+    }
+    p {
+      text-transform: capitalize;
+      max-width: 20rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @include breakpoint-max(xs) {
+      width: 100%;
+    }
+  }
+}

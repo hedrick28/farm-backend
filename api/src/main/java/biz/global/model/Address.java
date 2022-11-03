@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,8 +40,9 @@ public class Address implements Serializable {
 	
 	private String street;
 	
-	private int houseNo;
+	private String houseNo;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = {CascadeType.ALL})
 	private Users user;
 }

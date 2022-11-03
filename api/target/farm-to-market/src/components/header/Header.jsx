@@ -1,25 +1,65 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBell,
   faDashboard,
+  faLightbulb,
+  faMessage,
   faRightFromBracket,
   faSearch,
   faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
 import { getUserInfo } from "../../services/userInf";
+import { getNotif, seenTip } from "../../services/notif";
+import { useState } from "react";
+import { Card } from "react-bootstrap";
+import TipModal from "../modals/TipModal";
+import { useDispatch } from "react-redux";
+import { tipModal } from "../../redux/actions/tipModal";
+import { deleteTip } from "../../redux/actions/tip";
 const Header = () => {
+  const [notif, setNotif] = useState(null);
+  const [tipModalContent, setTipModalContent] = useState(null);
   const userInfo = getUserInfo();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogout = () => {
     localStorage.removeItem("ftm");
     navigate("/");
   };
 
+  useEffect(() => {
+    if (getUserInfo()) {
+      getNotif(getUserInfo().data.user_id).then((res) => {
+        if (res.data && res.data.status === 1) {
+          setNotif({ ...res.data });
+        }
+      });
+    }
+  }, []);
+
+  const handleTipOnClick = (data) => {
+    seenTip(data.tip_id).then((res) => {
+      if (res.data && res.data.status === 1) {
+        dispatch(tipModal(true));
+        setTipModalContent(data);
+      }
+    });
+  };
+
+  const handleDeleteTip = (id, data) => {
+    dispatch(deleteTip(id, data));
+  };
+
   return (
     <nav className="navbar f-bg-primary navbar-expand-lg navbar-light">
+      {tipModalContent && (
+        <TipModal content={tipModalContent} onDelete={handleDeleteTip} />
+      )}
+
       <div className="container">
         <Link className="navbar-brand" to="">
           <img className="logo" src={logo} />
@@ -69,40 +109,98 @@ const Header = () => {
               </>
             )}
             {userInfo && (
-              <li>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    id="dropdown-basic"
-                    className="header-profile"
-                  >
-                    {userInfo && userInfo.data.firstName.toUpperCase()}
-                  </Dropdown.Toggle>
+              <>
+                <li className="d-flex justify-content-center align-items-center me-4">
+                  <Link className="badge">
+                    <FontAwesomeIcon icon={faBell} color="#30830c" size="2x" />
+                    <span className="badge bg-danger">1</span>
+                  </Link>
+                </li>
+                <li className="d-flex justify-content-center align-items-center me-4">
+                  <Link className="badge">
+                    <FontAwesomeIcon
+                      icon={faMessage}
+                      color="#30830c"
+                      size="2x"
+                    />
+                    <span className="badge bg-danger">1</span>
+                  </Link>
+                </li>
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="/dashboard">
-                      <FontAwesomeIcon
-                        icon={faDashboard}
-                        className="f-text-color"
-                      />
-                      <span className="ms-2">Dashboard</span>
-                    </Dropdown.Item>
-                    <Dropdown.Item href="/profile">
-                      <FontAwesomeIcon
-                        icon={faUserCheck}
-                        className="f-text-color"
-                      />
-                      <span className="ms-2">Profile</span>
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={handleLogout}>
-                      <FontAwesomeIcon
-                        icon={faRightFromBracket}
-                        className="f-text-color"
-                      />
-                      <span className="ms-2">Logout</span>
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </li>
+                {notif && (
+                  <li>
+                    <Dropdown>
+                      <Dropdown.Toggle className="header-profile notif-dropdown">
+                        <Link className="badge">
+                          <FontAwesomeIcon
+                            icon={faLightbulb}
+                            size="2x"
+                            color="#30830c"
+                          />
+                          {notif && notif.tipSize > 0 && (
+                            <span className="badge bg-danger">
+                              {notif && notif.tipSize}
+                            </span>
+                          )}
+                        </Link>
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu className="notif">
+                        {notif &&
+                          notif.tips.map((tip, idx) => (
+                            <Dropdown.Item
+                              className="notif-item"
+                              key={idx}
+                              onClick={() => handleTipOnClick(tip)}
+                            >
+                              <div
+                                className={`${
+                                  !tip.seen ? "fw-bold" : ""
+                                } notif-content`}
+                              >
+                                <div>{tip.title}</div>
+                                <p>{tip.content}</p>
+                              </div>
+                            </Dropdown.Item>
+                          ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </li>
+                )}
+                <li>
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      id="dropdown-basic"
+                      className="header-profile"
+                    >
+                      {userInfo && userInfo.data.firstName.toUpperCase()}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="/dashboard">
+                        <FontAwesomeIcon
+                          icon={faDashboard}
+                          className="f-text-color"
+                        />
+                        <span className="ms-2">Dashboard</span>
+                      </Dropdown.Item>
+                      <Dropdown.Item href="/profile">
+                        <FontAwesomeIcon
+                          icon={faUserCheck}
+                          className="f-text-color"
+                        />
+                        <span className="ms-2">Profile</span>
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={handleLogout}>
+                        <FontAwesomeIcon
+                          icon={faRightFromBracket}
+                          className="f-text-color"
+                        />
+                        <span className="ms-2">Logout</span>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
+              </>
             )}
           </ul>
         </div>

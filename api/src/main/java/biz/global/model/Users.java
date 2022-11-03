@@ -1,14 +1,21 @@
 package biz.global.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,10 +54,35 @@ public class Users implements  Serializable {
 	
 	private String gender;
 	
+	private String mobile;
+	
+	private String profile;
+	
 	private Boolean activeDeactive = false;
 	
-	@OneToMany(mappedBy = "user")
-	private List<Address> address;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Address> address = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner")
+	private List<Products> product = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner")
+	private List<Tips> tips = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "respondent")
+	private List<Tips> tip = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "buyer")
+	private Cart cartBuyer;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "seller")
+	private Cart cartSeller;
+	
 	
 	
 }
