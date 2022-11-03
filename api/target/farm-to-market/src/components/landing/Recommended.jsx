@@ -19,9 +19,6 @@ const Recommended = () => {
 
   const handleProductDetails = (e, id) => {
     e.preventDefault();
-    if (!getUserInfo()) {
-      return navigate("/login");
-    }
 
     return navigate(`/details/product/${id}`);
   };
@@ -56,9 +53,9 @@ const Recommended = () => {
                           <FontAwesomeIcon size="xs" icon={faPesoSign} />
                           {product.price}
                         </p>
-                        <button className="btn btn-f-primary w-100 text-uppercase">
+                        {/* <button className="btn btn-f-primary w-100 text-uppercase">
                           <FontAwesomeIcon icon={faPlusSquare} /> add to cart
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </Link>

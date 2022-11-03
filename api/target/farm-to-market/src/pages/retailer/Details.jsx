@@ -34,10 +34,18 @@ const Details = () => {
               <Col lg={6}>
                 <div className="">
                   <h5 className="text-uppercase">{product.productName}</h5>
+
                   <p>{product.description}</p>
+                  <p>
+                    Category: &nbsp;{product.category ? product.category : ""}
+                  </p>
                   <p>Price: PHP&nbsp;{product.price}</p>
                   <p>Stock: &nbsp;{product.stock}</p>
                   <p>Unit: &nbsp;{product.unit}</p>
+                  <p>
+                    Shipping Fee: &nbsp;
+                    {product.shippingFee ? product.shippingFee : ""}
+                  </p>
                 </div>
               </Col>
             </Row>
